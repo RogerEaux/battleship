@@ -22,9 +22,9 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "test-watch": "jest --watch",
-    "build-watch": "webpack",
-    "watch": "webpack --watch"
+    "test-watch": "jest --watchAll",
+    "build": "webpack",
+    "build-watch": "webpack --watch"
   },
   "jest": {
     "transform": {
