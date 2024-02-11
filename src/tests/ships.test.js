@@ -12,4 +12,13 @@ describe('Ship tests', () => {
     expect(ship.hit()).toBe(1);
     expect(ship.hit()).toBe(0);
   });
+
+  test('Ship is sunk wheh hitPoints hit 0', () => {
+    const ship = createShip(3);
+    ship.hit();
+    ship.hit();
+    expect(ship.isSunk()).toBe(false);
+    ship.hit();
+    expect(ship.isSunk()).toBe(true);
+  });
 });
