@@ -5,4 +5,11 @@ describe('Ship tests', () => {
     const ship = createShip(3);
     expect(ship.length).toBe(3);
   });
+
+  test('Ship hit reduces hitPoint by 1', () => {
+    const ship = createShip(3);
+    expect(ship.hit()).toBe(2);
+    expect(ship.hit()).toBe(1);
+    expect(ship.hit()).toBe(0);
+  });
 });
