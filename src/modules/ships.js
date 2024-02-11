@@ -1,19 +1,3 @@
-//  Ships
-//
-//  length
-//  hitPoints
-//  sunk
-//  hit()
-
-//  Reduces hitPoints by 1
-//  If hitPoints is 0
-//    Set sunk to true
-//  Return hitPoints
-
-//  isSunk()
-
-//  Returns sunk
-
 export function createShip(length) {
   let shipLength = length;
   let hitPoints = shipLength;
@@ -24,11 +8,17 @@ export function createShip(length) {
     return hitPoints;
   }
 
+  function isSunk() {
+    //  Sunk if no hitPoints left
+    return hitPoints === 0;
+  }
+
   return {
     get length() {
       return shipLength;
     },
 
     hit,
+    isSunk,
   };
 }
