@@ -26,6 +26,17 @@ main {
 
 .player {
   display: grid;
-  grid-template-rows: 2rem;
+  grid-template-rows: 2rem 1fr;
   justify-content: center;
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+}
+
+.row {
+  width: 40px;
+  height: 40px;
+  border: 1px solid black;
 }
