@@ -5,20 +5,6 @@
 //  Submarine (3), and Destroyer (2)
 
 //  place(length, coords)
-
-//  If coord's x + length is greater than 9
-//    Return false
-//
-//
-//  Check if coords are valid placement
-//    Return false if not
-//  Create ship with length
-//  Add ship to ships with name according to length
-//  Add coords to grid with name according to ship
-//  Return true
-
-//
-
 //  receiveAttack()
 //  areAllSunk()
 
@@ -42,13 +28,20 @@ export function createGameboard() {
   }
 
   function isValidPlace(length, coords) {
+    const [x, y] = coords;
+
     //  Coords outside board
-    if (coords[0] > 9 || coords[0] < 0 || coords[1] > 9 || coords[1] < 0) {
+    if (x > 9 || x < 0 || y > 9 || y < 0) {
       return false;
     }
 
     //  Ship overflows outside board
-    if (coords[0] + length > 9) return false;
+    if (x + length > 9) return false;
+
+    //  Ship on ship violence
+    for (let i = 0; i < length; i += 1) {
+      if (boardGrid[x + i][y]) return false;
+    }
 
     return true;
   }
@@ -57,10 +50,11 @@ export function createGameboard() {
     if (!isValidPlace(length, coords)) return false;
 
     const ship = createShip(length);
+    const [x, y] = coords;
 
     //  Place ship on given coords
     for (let i = 0; i < length; i += 1) {
-      boardGrid[coords[0] + i][coords[1]] = ship;
+      boardGrid[x + i][y] = ship;
     }
 
     return true;
