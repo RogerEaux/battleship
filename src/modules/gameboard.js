@@ -80,14 +80,19 @@ export function createGameboard() {
     //  Look at coords
     //  If there's a ship
     //    Hit it
+    //    Record hit
     //  Else
     //    Record the miss
     const [x, y] = coords;
 
-    if (!boardGrid[x][y]) {
+    if (boardGrid[x][y] && boardGrid[x][y] !== true) {
+      boardGrid[x][y].hit();
+      boardGrid[x][y] = true;
+    } else {
       boardGrid[x][y] = false;
-      return boardGrid[x][y];
     }
+
+    return boardGrid[x][y];
   }
 
   return {
