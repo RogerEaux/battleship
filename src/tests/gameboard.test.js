@@ -70,4 +70,15 @@ describe('Gameboard tests', () => {
     gameboard.receiveAttack([3, 3]);
     expect(gameboard.receiveAttack([3, 3])).toBeNull();
   });
+
+  test('All ships are sunk', () => {
+    gameboard.place(3, [3, 3]);
+    expect(gameboard.areAllSunk()).toEqual(false);
+
+    gameboard.receiveAttack([3, 3]);
+    gameboard.receiveAttack([4, 3]);
+    gameboard.receiveAttack([5, 3]);
+
+    expect(gameboard.areAllSunk()).toEqual(true);
+  });
 });
