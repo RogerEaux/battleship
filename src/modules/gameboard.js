@@ -38,9 +38,22 @@ export function createGameboard() {
     return grid;
   }
 
+  function place(length, coords) {
+    const ship = createShip(length);
+
+    //  Place ship on given coords
+    for (let i = 0; i < length; i += 1) {
+      boardGrid[coords[0] + i][coords[1]] = ship;
+    }
+
+    return true;
+  }
+
   return {
     get grid() {
       return boardGrid;
     },
+
+    place,
   };
 }
