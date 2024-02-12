@@ -74,11 +74,28 @@ export function createGameboard() {
     return true;
   }
 
+  function receiveAttack(coords) {
+    //  receiveAttack(coords)
+    //
+    //  Look at coords
+    //  If there's a ship
+    //    Hit it
+    //  Else
+    //    Record the miss
+    const [x, y] = coords;
+
+    if (!boardGrid[x][y]) {
+      boardGrid[x][y] = false;
+      return boardGrid[x][y];
+    }
+  }
+
   return {
     get grid() {
       return boardGrid;
     },
 
     place,
+    receiveAttack,
   };
 }
