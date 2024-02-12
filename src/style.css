@@ -16,3 +16,16 @@ header > * {
   margin-top: 32px;
   padding: 16px;
 }
+
+main {
+  width: 90%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.player {
+  display: grid;
+  grid-template-rows: 2rem;
+  justify-content: center;
+}
