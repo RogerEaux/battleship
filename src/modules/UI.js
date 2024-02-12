@@ -20,9 +20,9 @@ function createBoard() {
     for (let j = 0; j < 10; j += 1) {
       const square = document.createElement('div');
 
-      square.classList = `square`;
-      square.setAttribute('data-row', i);
-      square.setAttribute('data-col', j);
+      square.classList = `square ocean`;
+      square.setAttribute('data-col', i);
+      square.setAttribute('data-row', j);
 
       board.append(square);
     }
@@ -66,4 +66,26 @@ export function createContent() {
   const body = document.querySelector('body');
 
   body.append(createHeader(), createMain(), createFooter());
+}
+
+export function renderGameboard(player, gameboard) {
+  const targetBoard = document.querySelector(
+    `[data-player="${player}"]`,
+  ).lastChild;
+
+  for (let i = 0; i < 10; i += 1) {
+    for (let j = 0; j < 10; j += 1) {
+      const square = targetBoard.querySelector(
+        `[data-row="${i}"][data-col="${j}"]`,
+      );
+
+      if (gameboard.grid[i][j] === true) {
+        square.classList.add('hit');
+      } else if (gameboard.grid[i][j] === false) {
+        square.classList.add('miss');
+      } else if (gameboard.grid[i][j]) {
+        square.classList.add('ship');
+      }
+    }
+  }
 }
