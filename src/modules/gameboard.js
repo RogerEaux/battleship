@@ -27,7 +27,7 @@ export function createGameboard() {
     }
 
     //  Ship overflows outside board
-    if (x + length > 9) return false;
+    if (x + length > 10) return false;
 
     //  Ship on ship violence
     for (let i = 0; i < length; i += 1) {
@@ -37,7 +37,7 @@ export function createGameboard() {
     //  Shyps cant have other shyps touching them
     const start = x === 0 ? 0 : -1;
 
-    const end = x + length === 9 ? length : length + 1;
+    const end = x + length === 10 ? length : length + 1;
 
     for (let i = start; i < end; i += 1) {
       if (y > 0) {
