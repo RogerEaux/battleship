@@ -1,18 +1,9 @@
-//  Gameboard
-
-//  Contains grid 10 x 10 - multidimensional array to record attacks
-//  Has 5 different ships within:  Carrier (5), Battleship (4), Cruiser (3),
-//  Submarine (3), and Destroyer (2)
-
-//  place(length, coords)
-//  receiveAttack()
-//  areAllSunk()
-
 import { createShip } from './ships';
 
 export function createGameboard() {
   const gridSize = 10;
   const boardGrid = generateGrid(gridSize);
+  const activeShips = [];
 
   function generateGrid(gridSize) {
     const grid = [];
@@ -66,6 +57,8 @@ export function createGameboard() {
     const ship = createShip(length);
     const [x, y] = coords;
 
+    activeShips.push(ship);
+
     //  Place ship on given coords
     for (let i = 0; i < length; i += 1) {
       boardGrid[x + i][y] = ship;
@@ -91,6 +84,12 @@ export function createGameboard() {
     return boardGrid[x][y];
   }
 
+  function areAllSunk() {
+    if (activeShips.filter((ship) => !ship.isSunk()).length > 0) return false;
+
+    return true;
+  }
+
   return {
     get grid() {
       return boardGrid;
@@ -98,5 +97,6 @@ export function createGameboard() {
 
     place,
     receiveAttack,
+    areAllSunk,
   };
 }
