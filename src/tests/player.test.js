@@ -30,4 +30,9 @@ describe('Player tests', () => {
 
     expect(enemy.gameboard.grid[3][3]).toStrictEqual(false);
   });
+
+  test('Attack random spot', () => {
+    enemy.gameboard.place(3, [3, 3]);
+    expect(hero.blindFire(enemy.gameboard)).toEqual(true);
+  });
 });
