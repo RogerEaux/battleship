@@ -35,4 +35,10 @@ describe('Gameboard tests', () => {
     expect(gameboard.place(3, [0, -1])).toEqual(false);
     expect(gameboard.place(3, [8, 0])).toEqual(false);
   });
+
+  test('Ships must not be placed on each other', () => {
+    gameboard.place(3, [3, 3]);
+    expect(gameboard.place(3, [5, 3])).toEqual(false);
+    expect(gameboard.place(3, [1, 3])).toEqual(false);
+  });
 });
