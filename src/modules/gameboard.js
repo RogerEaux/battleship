@@ -75,17 +75,13 @@ export function createGameboard() {
   }
 
   function receiveAttack(coords) {
-    //  receiveAttack(coords)
-    //
-    //  Look at coords
-    //  If there's a ship
-    //    Hit it
-    //    Record hit
-    //  Else
-    //    Record the miss
     const [x, y] = coords;
 
-    if (boardGrid[x][y] && boardGrid[x][y] !== true) {
+    //  Lightning can't strike on the same spot twice
+    if (boardGrid[x][y] === true || boardGrid[x][y] === false) return null;
+
+    //  If it is a ship
+    if (boardGrid[x][y]) {
       boardGrid[x][y].hit();
       boardGrid[x][y] = true;
     } else {
