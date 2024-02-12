@@ -38,8 +38,10 @@ function createMain() {
   const playerTwo = document.createElement('div');
   const playerTwoName = document.createElement('h2');
 
-  playerOne.classList = 'player playerOne';
-  playerTwo.classList = 'player playerTwo';
+  playerOne.classList = 'player';
+  playerOne.setAttribute('data-player', '1');
+  playerTwo.classList = 'player';
+  playerTwo.setAttribute('data-player', '2');
 
   playerOne.append(playerOneName, createBoard());
   playerTwo.append(playerTwoName, createBoard());
