@@ -26,4 +26,10 @@ describe('Gameboard tests', () => {
     testGrid[2][0] = ship;
     expect(gameboard.grid.toString()).toEqual(testGrid.toString());
   });
+
+  test('Ship can not be placed outside board', () => {
+    expect(gameboard.place(3, [10, 0])).toEqual(false);
+    expect(gameboard.place(3, [0, -1])).toEqual(false);
+    expect(gameboard.place(3, [8, 0])).toEqual(false);
+  });
 });
