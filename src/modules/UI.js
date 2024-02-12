@@ -17,18 +17,15 @@ function createBoard() {
   board.classList = 'board';
 
   for (let i = 0; i < 10; i += 1) {
-    const col = document.createElement('div');
-
-    col.classList = `col col-${i}`;
     for (let j = 0; j < 10; j += 1) {
-      const row = document.createElement('div');
+      const square = document.createElement('div');
 
-      row.classList = `row row-${j}`;
+      square.classList = `square`;
+      square.setAttribute('data-row', i);
+      square.setAttribute('data-col', j);
 
-      col.append(row);
+      board.append(square);
     }
-
-    board.append(col);
   }
 
   return board;
