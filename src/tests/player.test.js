@@ -1,12 +1,19 @@
 import { createPlayer } from '../modules/player';
-let player;
+let hero;
+let enemy;
 
 beforeEach(() => {
-  player = createPlayer('Alec');
+  hero = createPlayer('Alec');
+  enemy = createPlayer('Cela');
 });
 
 describe('Player tests', () => {
   test('Player has given name', () => {
-    expect(player.name).toEqual('Alec');
+    expect(hero.name).toEqual('Alec');
+  });
+
+  test(`Enemy's gameboard is attacked`, () => {
+    expect(hero.attack(enemy.gameboard, [0, 0])).toEqual(true);
+    expect(enemy.gameboard.grid[0][0]).not.toBeNull();
   });
 });
