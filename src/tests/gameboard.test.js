@@ -11,6 +11,9 @@ beforeEach(() => {
   testGrid = [];
   for (let i = 0; i < 10; i += 1) {
     testGrid.push([]);
+    for (let j = 0; j < 10; j += 1) {
+      testGrid[i][j] = null;
+    }
   }
 });
 
