@@ -43,6 +43,20 @@ export function createGameboard() {
       if (boardGrid[x + i][y]) return false;
     }
 
+    //  Shyps cant have other shyps touching them
+    const start = x === 0 ? 0 : -1;
+
+    const end = x + length === 9 ? length : length + 1;
+
+    for (let i = start; i < end; i += 1) {
+      if (y > 0) {
+        if (boardGrid[x + i][y + 1]) return false;
+      }
+      if (y < 9) {
+        if (boardGrid[x + i][y - 1]) return false;
+      }
+    }
+
     return true;
   }
 
