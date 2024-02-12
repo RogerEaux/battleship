@@ -46,20 +46,36 @@ main {
   border: 1px solid black;
 }
 
-.square[data-row='0'] {
+.square[data-col='0'] {
   border-top: 2px solid black;
 }
 
-.square[data-row='9'] {
+.square[data-col='9'] {
   border-bottom: 2px solid black;
 }
 
-.square[data-col='0'] {
+.square[data-row='0'] {
   border-left: 2px solid black;
 }
 
-.square[data-col='9'] {
+.square[data-row='9'] {
   border-right: 2px solid black;
+}
+
+.ocean {
+  background-color: skyblue;
+}
+
+.ship {
+  background-color: gray;
+}
+
+.hit {
+  background-color: red;
+}
+
+.miss {
+  background-color: purple;
 }
 
 footer {
