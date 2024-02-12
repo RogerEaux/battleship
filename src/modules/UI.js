@@ -50,8 +50,20 @@ function createMain() {
   return main;
 }
 
+function createFooter() {
+  const footer = document.createElement('footer');
+  const copy = document.createElement('p');
+  const name = document.createElement('p');
+
+  copy.textContent = 'Copyright © 2023 ';
+  name.textContent = 'RogerEaux';
+  footer.append(copy, name);
+
+  return footer;
+}
+
 export function createContent() {
   const body = document.querySelector('body');
 
-  body.append(createHeader(), createMain());
+  body.append(createHeader(), createMain(), createFooter());
 }
