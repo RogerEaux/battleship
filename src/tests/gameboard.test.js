@@ -49,4 +49,8 @@ describe('Gameboard tests', () => {
     expect(gameboard.place(3, [6, 4])).toEqual(false);
     expect(gameboard.place(3, [2, 2])).toEqual(false);
   });
+
+  test('Attack misses', () => {
+    expect(gameboard.receiveAttack([0, 0])).toEqual(false);
+  });
 });
