@@ -63,4 +63,11 @@ describe('Gameboard tests', () => {
 
     expect(gameboard.receiveAttack([3, 3])).toEqual(true);
   });
+
+  test('Attack cant hit same spot twice', () => {
+    gameboard.place(3, [3, 3]);
+
+    gameboard.receiveAttack([3, 3]);
+    expect(gameboard.receiveAttack([3, 3])).toBeNull();
+  });
 });
