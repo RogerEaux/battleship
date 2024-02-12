@@ -38,7 +38,21 @@ export function createGameboard() {
     return grid;
   }
 
+  function isValidPlace(length, coords) {
+    //  Coords outside board
+    if (coords[0] > 9 || coords[0] < 0 || coords[1] > 9 || coords[1] < 0) {
+      return false;
+    }
+
+    //  Ship overflows outside board
+    if (coords[0] + length > 9) return false;
+
+    return true;
+  }
+
   function place(length, coords) {
+    if (!isValidPlace(length, coords)) return false;
+
     const ship = createShip(length);
 
     //  Place ship on given coords
