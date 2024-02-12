@@ -1,6 +1,5 @@
 export function createShip(length) {
-  let shipLength = length;
-  let hitPoints = shipLength;
+  let hitPoints = length;
 
   function hit() {
     hitPoints -= 1;
@@ -14,10 +13,6 @@ export function createShip(length) {
   }
 
   return {
-    get length() {
-      return shipLength;
-    },
-
     hit,
     isSunk,
   };
