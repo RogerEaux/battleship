@@ -54,14 +54,16 @@ describe('Gameboard tests', () => {
     expect(gameboard.place(3, [2, 2])).toEqual(false);
   });
 
-  test('Attack misses', () => {
+  test('Attack miss is recorded', () => {
     expect(gameboard.receiveAttack([0, 0])).toEqual(false);
+    expect(gameboard.grid[0][0]).toEqual(false);
   });
 
-  test('Attack hits', () => {
+  test('Attack hit is recorded', () => {
     gameboard.place(3, [3, 3]);
 
     expect(gameboard.receiveAttack([3, 3])).toEqual(true);
+    expect(gameboard.grid[3][3]).toEqual(true);
   });
 
   test('Attack cant hit same spot twice', () => {
