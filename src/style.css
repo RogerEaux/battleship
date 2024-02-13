@@ -1,3 +1,11 @@
+:root {
+  --border: black;
+  --ocean: #5eaef9;
+  --ship: #627790;
+  --hit: #d82a31;
+  --miss: #e7eef4;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -19,6 +27,9 @@ header > * {
   font-size: 6rem;
   margin-top: 32px;
   padding: 16px;
+  background: linear-gradient(var(--border), var(--ocean));
+  background-clip: text;
+  color: transparent;
 }
 
 main {
@@ -43,39 +54,44 @@ main {
 }
 
 .square {
-  border: 1px solid black;
+  border: 1px solid var(--border);
+  cursor: pointer;
 }
 
 .square[data-col='0'] {
-  border-top: 2px solid black;
+  border-top: 2px solid var(--border);
 }
 
 .square[data-col='9'] {
-  border-bottom: 2px solid black;
+  border-bottom: 2px solid var(--border);
 }
 
 .square[data-row='0'] {
-  border-left: 2px solid black;
+  border-left: 2px solid var(--border);
 }
 
 .square[data-row='9'] {
-  border-right: 2px solid black;
+  border-right: 2px solid var(--border);
+}
+
+.inactive {
+  cursor: default;
 }
 
 .ocean {
-  background-color: skyblue;
+  background-color: var(--ocean);
 }
 
 .ship {
-  background-color: gray;
+  background-color: var(--ship);
 }
 
 .hit {
-  background-color: red;
+  background-color: var(--hit);
 }
 
 .miss {
-  background-color: purple;
+  background-color: var(--miss);
 }
 
 footer {
