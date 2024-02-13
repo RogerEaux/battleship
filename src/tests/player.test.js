@@ -13,7 +13,7 @@ describe('Player tests', () => {
   });
 
   test(`Enemy's gameboard is attacked`, () => {
-    expect(hero.attack(enemy.gameboard, [0, 0])).toEqual(true);
+    expect(hero.attack(enemy.gameboard, [0, 0])).toEqual([0, 0]);
     expect(enemy.gameboard.grid[0][0]).not.toBeNull();
   });
 
@@ -33,6 +33,6 @@ describe('Player tests', () => {
 
   test('Attack random spot', () => {
     enemy.gameboard.place(3, [3, 3]);
-    expect(hero.blindFire(enemy.gameboard)).toEqual(true);
+    expect(hero.blindFire(enemy.gameboard)).toBeTruthy();
   });
 });
