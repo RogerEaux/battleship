@@ -108,3 +108,26 @@ export function renderShot(gameboard, square) {
     square.classList.add('miss');
   }
 }
+
+function createGameOverModal(winnerName) {
+  const modal = document.createElement('div');
+  const gameOver = document.createElement('p');
+  const winner = document.createElement('p');
+  const playAgain = document.createElement('button');
+
+  modal.classList = 'modal game-over';
+  gameOver.textContent = 'GAME OVER';
+  winner.textContent = `Total ${winnerName} Domination`;
+  playAgain.textContent = 'Play Again?';
+
+  modal.append(gameOver, winner, playAgain);
+
+  return modal;
+}
+
+export function renderGameOver(winner) {
+  const body = document.querySelector('body');
+  const modal = createGameOverModal(winner);
+
+  body.append(modal);
+}
