@@ -78,14 +78,25 @@ export function renderGameboard(player, gameboard) {
       const square = targetBoard.querySelector(
         `[data-row="${i}"][data-col="${j}"]`,
       );
-
-      if (gameboard.grid[i][j] === true) {
-        square.classList.add('hit');
-      } else if (gameboard.grid[i][j] === false) {
-        square.classList.add('miss');
-      } else if (gameboard.grid[i][j]) {
+      if (player === 1) {
+        square.classList.add('inactive');
+      }
+      if (gameboard.grid[i][j] && gameboard.grid[i][j] !== true) {
         square.classList.add('ship');
       }
     }
+  }
+}
+
+export function renderShot(gameboard, square) {
+  const i = square.getAttribute('data-row');
+  const j = square.getAttribute('data-col');
+
+  square.classList.add('inactive');
+
+  if (gameboard.grid[i][j] === true) {
+    square.classList.add('hit');
+  } else if (gameboard.grid[i][j] === false) {
+    square.classList.add('miss');
   }
 }
