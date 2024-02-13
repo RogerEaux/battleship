@@ -1,5 +1,5 @@
 import { createPlayer } from './player';
-import { renderGameboard, renderShot } from './UI';
+import { renderGameboard, renderGameOver, renderName, renderShot } from './UI';
 
 export function createGame() {
   const human = createPlayer('Human');
@@ -19,6 +19,12 @@ export function createGame() {
     computer.gameboard.place(2, [8, 2]);
   }
 
+  function isWinner(player, opponent) {
+    if (opponent.gameboard.areAllSunk()) {
+      renderGameOver(player.name);
+    }
+  }
+
   function handleAttack() {
     const i = this.getAttribute('data-row');
     const j = this.getAttribute('data-col');
@@ -26,6 +32,7 @@ export function createGame() {
     //  Record and render human attack
     human.attack(computer.gameboard, [i, j]);
     renderShot(computer.gameboard, this);
+    isWinner(human, computer);
 
     //  Some cinematic showing computer counter attacking and delay
 
@@ -37,6 +44,7 @@ export function createGame() {
       human.gameboard,
       targetBoard.querySelector(`[data-row="${x}"][data-col="${y}"]`),
     );
+    isWinner(computer, human);
   }
 
   function addAttackListeners() {
@@ -53,10 +61,16 @@ export function createGame() {
     }
   }
 
+  function renderContent() {
+    renderGameboard(1, human.gameboard);
+    renderName(1, human);
+    renderName(2, computer);
+  }
+
   function startGame() {
     placeShips();
+    renderContent();
     addAttackListeners();
-    renderGameboard(1, human.gameboard);
   }
 
   return {
