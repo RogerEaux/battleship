@@ -9,9 +9,8 @@ beforeEach(() => {
 
 describe('Gameboard tests', () => {
   test('Generates grid correctly', () => {
-    let testGrid;
+    const testGrid = [];
 
-    testGrid = [];
     for (let i = 0; i < 10; i += 1) {
       testGrid.push([]);
       for (let j = 0; j < 10; j += 1) {
@@ -87,5 +86,21 @@ describe('Gameboard tests', () => {
     gameboard.receiveAttack([5, 3]);
 
     expect(gameboard.areAllSunk()).toEqual(true);
+  });
+
+  test('Gameboard is reset', () => {
+    const testGrid = [];
+
+    for (let i = 0; i < 10; i += 1) {
+      testGrid.push([]);
+      for (let j = 0; j < 10; j += 1) {
+        testGrid[i][j] = null;
+      }
+    }
+
+    gameboard.place(3, [3, 3]);
+    expect(gameboard.grid).not.toEqual(testGrid);
+    gameboard.reset();
+    expect(gameboard.grid).toEqual(testGrid);
   });
 });
