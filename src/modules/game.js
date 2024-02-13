@@ -5,27 +5,38 @@ export function createGame() {
   const human = createPlayer('Human');
   const computer = createPlayer('Computer');
 
-  human.gameboard.place(5, [0, 0]);
-  human.gameboard.place(4, [2, 2]);
-  human.gameboard.place(3, [4, 4]);
-  human.gameboard.place(3, [6, 6]);
-  human.gameboard.place(2, [8, 8]);
+  function placeShips() {
+    human.gameboard.place(5, [0, 0]);
+    human.gameboard.place(4, [2, 2]);
+    human.gameboard.place(3, [4, 4]);
+    human.gameboard.place(3, [6, 6]);
+    human.gameboard.place(2, [8, 8]);
 
-  computer.gameboard.place(5, [0, 2]);
-  computer.gameboard.place(4, [2, 8]);
-  computer.gameboard.place(3, [4, 6]);
-  computer.gameboard.place(3, [6, 4]);
-  computer.gameboard.place(2, [8, 2]);
-
-  renderGameboard(1, human.gameboard);
+    computer.gameboard.place(5, [0, 2]);
+    computer.gameboard.place(4, [2, 8]);
+    computer.gameboard.place(3, [4, 6]);
+    computer.gameboard.place(3, [6, 4]);
+    computer.gameboard.place(2, [8, 2]);
+  }
 
   function handleAttack() {
     const i = this.getAttribute('data-row');
     const j = this.getAttribute('data-col');
 
-    computer.gameboard.receiveAttack([i, j]);
-
+    //  Record and render human attack
+    human.attack(computer.gameboard, [i, j]);
     renderShot(computer.gameboard, this);
+
+    //  Some cinematic showing computer counter attacking and delay
+
+    //  Record and render computer attack
+    const targetBoard = document.querySelector(`[data-player="1"]`).lastChild;
+    const [x, y] = computer.blindFire(human.gameboard);
+
+    renderShot(
+      human.gameboard,
+      targetBoard.querySelector(`[data-row="${x}"][data-col="${y}"]`),
+    );
   }
 
   function addAttackListeners() {
@@ -42,7 +53,13 @@ export function createGame() {
     }
   }
 
+  function startGame() {
+    placeShips();
+    addAttackListeners();
+    renderGameboard(1, human.gameboard);
+  }
+
   return {
-    addAttackListeners,
+    startGame,
   };
 }
