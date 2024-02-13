@@ -88,6 +88,16 @@ export function createGameboard() {
     return activeShips.every((ship) => ship.isSunk());
   }
 
+  function reset() {
+    for (let i = 0; i < gridSize; i += 1) {
+      for (let j = 0; j < gridSize; j += 1) {
+        boardGrid[i][j] = null;
+      }
+    }
+
+    activeShips.length = 0;
+  }
+
   return {
     get grid() {
       return boardGrid;
@@ -96,5 +106,6 @@ export function createGameboard() {
     place,
     receiveAttack,
     areAllSunk,
+    reset,
   };
 }
