@@ -4,6 +4,8 @@
   --ship: #627790;
   --hit: #d82a31;
   --miss: #e7eef4;
+  --battleship: linear-gradient(var(--border), var(--ocean));
+  font-family: Helvetica, Arial, sans-serif;
 }
 
 * {
@@ -13,12 +15,17 @@
 }
 
 body {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template:
+    'header' max-content
+    'main' 1fr
+    'footer' max-content;
   height: 100vh;
+  background-color: var(--miss);
 }
 
 header {
+  grid-area: header;
   display: flex;
   justify-content: center;
 }
@@ -27,24 +34,29 @@ header > * {
   font-size: 6rem;
   margin-top: 32px;
   padding: 16px;
-  background: linear-gradient(var(--border), var(--ocean));
+  background: var(--battleship);
   background-clip: text;
   color: transparent;
 }
 
 main {
-  flex: 1;
+  grid-area: main;
   width: 90%;
   display: grid;
-  align-self: center;
+  justify-self: center;
   grid-template-columns: 1fr 1fr;
   gap: 16px;
+}
+
+main :last-child > h2 {
+  justify-self: end;
 }
 
 .player {
   display: grid;
   grid-template-rows: 2rem 1fr;
   justify-content: center;
+  align-self: center;
 }
 
 .board {
@@ -111,9 +123,60 @@ main {
   background-color: var(--miss);
 }
 
+.modal {
+  height: 100%;
+  width: 50%;
+  grid-area: main;
+  align-self: center;
+  justify-self: center;
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  background: var(--miss);
+  padding: 32px;
+  box-shadow: 0 0 0 50vmax rgba(0, 0, 0, 0.5);
+  border: 4px solid var(--ocean);
+  border-radius: 5px;
+  z-index: 2;
+}
+
+.modal :first-child {
+  font-size: 4rem;
+  color: var(--hit);
+  font-weight: 700;
+}
+
+.modal :nth-child(2) {
+  font-size: 2rem;
+  color: var(--ocean);
+  font-weight: 700;
+}
+
+.modal :last-child {
+  height: max-content;
+  font-size: 1.5rem;
+  font-weight: 700;
+  cursor: pointer;
+  background-color: var(--ship);
+  color: var(--miss);
+  padding: 16px;
+  border: none;
+  border-radius: 5px;
+}
+
+.modal :last-child:hover {
+  background-color: rgba(98, 119, 144, 0.8);
+}
+
 footer {
+  grid-area: footer;
   display: flex;
   justify-content: center;
   gap: 8px;
+  background: var(--battleship);
+  background-clip: text;
+  color: transparent;
+  font-size: 1.2rem;
+  font-weight: 700;
   padding: 16px;
 }
