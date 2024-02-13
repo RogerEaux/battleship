@@ -35,6 +35,10 @@ export function createPlayer(name) {
     return attack(enemyGameboard, coords);
   }
 
+  function reset() {
+    attackedSpots.length = 0;
+  }
+
   return {
     get name() {
       return playerName;
@@ -46,5 +50,6 @@ export function createPlayer(name) {
 
     attack,
     blindFire,
+    reset,
   };
 }
