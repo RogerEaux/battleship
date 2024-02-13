@@ -6,7 +6,8 @@ export function createPlayer(name) {
   const attackedSpots = [];
 
   function attack(enemyGameboard, coords) {
-    if (attackedSpots.includes(coords)) return null;
+    if (JSON.stringify(attackedSpots).includes(JSON.stringify(coords)))
+      return null;
 
     enemyGameboard.receiveAttack(coords);
     attackedSpots.push(coords);
@@ -27,7 +28,7 @@ export function createPlayer(name) {
   function blindFire(enemyGameboard) {
     let coords = generateRandomCoords();
 
-    while (attackedSpots.includes(coords)) {
+    while (JSON.stringify(attackedSpots).includes(JSON.stringify(coords))) {
       coords = generateRandomCoords();
     }
 
