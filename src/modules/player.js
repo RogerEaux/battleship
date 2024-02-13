@@ -11,7 +11,7 @@ export function createPlayer(name) {
     enemyGameboard.receiveAttack(coords);
     attackedSpots.push(coords);
 
-    return true;
+    return coords;
   }
 
   function generateRandomCoords() {
