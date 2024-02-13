@@ -20,8 +20,12 @@ export function createGame() {
   renderGameboard(1, human.gameboard);
 
   function handleAttack() {
-    this.classList.add('inactive');
-    renderShot(this);
+    const i = this.getAttribute('data-row');
+    const j = this.getAttribute('data-col');
+
+    computer.gameboard.receiveAttack([i, j]);
+
+    renderShot(computer.gameboard, this);
   }
 
   function addAttackListeners() {
