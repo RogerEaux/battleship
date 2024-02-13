@@ -68,17 +68,25 @@ export function createContent() {
   body.append(createHeader(), createMain(), createFooter());
 }
 
-export function renderGameboard(player, gameboard) {
-  const targetBoard = document.querySelector(
-    `[data-player="${player}"]`,
+export function renderName(playerNumber, player) {
+  const DOMName = document.querySelector(
+    `[data-player="${playerNumber}"]`,
+  ).firstChild;
+
+  DOMName.textContent = player.name;
+}
+
+export function renderGameboard(playerNumber, gameboard) {
+  const DOMBoard = document.querySelector(
+    `[data-player="${playerNumber}"]`,
   ).lastChild;
 
   for (let i = 0; i < 10; i += 1) {
     for (let j = 0; j < 10; j += 1) {
-      const square = targetBoard.querySelector(
+      const square = DOMBoard.querySelector(
         `[data-row="${i}"][data-col="${j}"]`,
       );
-      if (player === 1) {
+      if (playerNumber === 1) {
         square.classList.add('inactive');
       }
       if (gameboard.grid[i][j] && gameboard.grid[i][j] !== true) {
