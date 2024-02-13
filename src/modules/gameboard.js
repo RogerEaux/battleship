@@ -85,9 +85,7 @@ export function createGameboard() {
   }
 
   function areAllSunk() {
-    if (activeShips.filter((ship) => !ship.isSunk()).length > 0) return false;
-
-    return true;
+    return activeShips.every((ship) => ship.isSunk());
   }
 
   return {
