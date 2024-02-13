@@ -86,11 +86,28 @@ main {
   background-color: var(--ship);
 }
 
+.miss,
 .hit {
+  position: relative;
+}
+
+.miss::after,
+.hit::after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  content: '';
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+}
+
+.hit::after {
   background-color: var(--hit);
 }
 
-.miss {
+.miss::after {
   background-color: var(--miss);
 }
 
