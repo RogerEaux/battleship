@@ -228,7 +228,7 @@ main :last-child > h2 {
   font-weight: 700;
 }
 
-.game-start > :nth-child(4):hover {
+.game-start > :nth-child(5):hover {
   background-color: rgba(216, 42, 49, 0.8);
 }
 
