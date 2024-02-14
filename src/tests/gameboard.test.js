@@ -78,6 +78,25 @@ describe('Gameboard tests', () => {
     expect(gameboard.place(3, [6, 4])).toEqual(false);
   });
 
+  test('Ships must not be placed near each other vertically', () => {
+    gameboard.place(3, [3, 3], true);
+
+    expect(gameboard.place(3, [2, 2], true)).toEqual(false);
+    expect(gameboard.place(3, [2, 3], true)).toEqual(false);
+    expect(gameboard.place(3, [2, 4], true)).toEqual(false);
+    expect(gameboard.place(3, [2, 5], true)).toEqual(false);
+    expect(gameboard.place(3, [2, 6], true)).toEqual(false);
+
+    expect(gameboard.place(3, [3, 2], true)).toEqual(false);
+    expect(gameboard.place(3, [3, 6], true)).toEqual(false);
+
+    expect(gameboard.place(3, [4, 2], true)).toEqual(false);
+    expect(gameboard.place(3, [4, 3], true)).toEqual(false);
+    expect(gameboard.place(3, [4, 4], true)).toEqual(false);
+    expect(gameboard.place(3, [4, 5], true)).toEqual(false);
+    expect(gameboard.place(3, [4, 6], true)).toEqual(false);
+  });
+
   test('Ships are placed randomly', () => {
     const allCoords = gameboard.placeRandom();
 
