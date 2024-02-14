@@ -2,7 +2,7 @@ import { createPlayer } from './player';
 import {
   renderGameboard,
   renderGameOver,
-  renderName,
+  renderGameStart,
   renderShot,
   resetGameboard,
 } from './UI';
@@ -10,10 +10,88 @@ import {
 export function createGame() {
   const human = createPlayer('Human');
   const computer = createPlayer('Computer');
+  let places = 5;
 
-  function placeShips() {
-    human.gameboard.placeRandom();
-    computer.gameboard.placeRandom();
+  function handlePlace() {
+    const x = parseInt(this.getAttribute('data-row'));
+    const y = parseInt(this.getAttribute('data-col'));
+    const coords = [x, y];
+    const length = places > 2 ? places : places === 0 ? 0 : places + 1;
+    const place = document.querySelector('.game-start > :nth-child(3)');
+    const ships = ['Destroyer', 'Submarine', 'Cruiser', 'Battleship'];
+
+    if (human.gameboard.place(length, coords)) {
+      place.textContent = `Place Your ${ships[places - 2]}`;
+      places -= 1;
+      for (let i = 0; i < length; i += 1) {
+        if (x + i < 10) {
+          const square = this.parentNode.querySelector(
+            `[data-row="${x + i}"][data-col="${y}"]`,
+          );
+
+          square.classList.add('ship');
+        }
+      }
+    }
+
+    if (places === 0) {
+      place.textContent = 'Get Ready for BATTLE';
+      addGameStartListener();
+    }
+  }
+
+  function handlePreview() {
+    const x = parseInt(this.getAttribute('data-row'));
+    const y = parseInt(this.getAttribute('data-col'));
+    const length = places > 2 ? places : places === 0 ? 0 : places + 1;
+
+    for (let i = 0; i < 10; i += 1) {
+      for (let j = 0; j < 10; j += 1) {
+        const square = this.parentNode.querySelector(
+          `[data-row="${i}"][data-col="${j}"]`,
+        );
+        square.classList.remove('preview');
+      }
+    }
+
+    for (let i = 0; i < length; i += 1) {
+      if (x + i < 10) {
+        const square = this.parentNode.querySelector(
+          `[data-row="${x + i}"][data-col="${y}"]`,
+        );
+
+        square.classList.add('preview');
+      }
+    }
+  }
+
+  function addStartBoardListeners() {
+    const targetBoard = document.querySelector('.game-start > :nth-child(4)');
+
+    for (let i = 0; i < 10; i += 1) {
+      for (let j = 0; j < 10; j += 1) {
+        const square = targetBoard.querySelector(
+          `[data-row="${i}"][data-col="${j}"]`,
+        );
+
+        square.addEventListener('click', handlePlace);
+        square.addEventListener('mouseover', handlePreview);
+      }
+    }
+  }
+
+  function handleGameStart() {
+    renderGameStart();
+    renderGameboard(
+      document.querySelector('[data-player="1"]').lastChild,
+      human.gameboard,
+    );
+  }
+
+  function addGameStartListener() {
+    const gameStart = document.querySelector('.game-start > :last-child');
+
+    gameStart.addEventListener('click', handleGameStart);
   }
 
   function isWinner(player, opponent) {
@@ -73,7 +151,19 @@ export function createGame() {
     }
   }
 
+  function placeRandomShips() {
+    human.gameboard.placeRandom();
+    computer.gameboard.placeRandom();
+  }
+
+  function placeShips() {
+    addStartBoardListeners();
+
+    computer.gameboard.placeRandom();
+  }
+
   function reset() {
+    //  Reset players, gameboards and DOM grids
     human.reset();
     human.gameboard.reset();
     computer.reset();
@@ -85,10 +175,7 @@ export function createGame() {
   function handleReplay() {
     renderGameOver();
     reset();
-    renderGameboard(1, human.gameboard);
-    placeShips();
-    renderGameboard(1, human.gameboard);
-    addAttackListeners();
+    renderGameStart();
   }
 
   function addReplayListener() {
@@ -97,21 +184,14 @@ export function createGame() {
     playAgain.addEventListener('click', handleReplay);
   }
 
-  function renderContent() {
-    renderGameboard(1, human.gameboard);
-    renderName(1, human);
-    renderName(2, computer);
-  }
-
   function addListeners() {
     addAttackListeners();
     addReplayListener();
   }
 
   function startGame() {
+    renderGameStart();
     placeShips();
-    renderContent();
-    addListeners();
   }
 
   return {
