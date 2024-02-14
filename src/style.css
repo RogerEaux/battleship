@@ -53,13 +53,17 @@ main {
   gap: 16px;
 }
 
+main h2 {
+  color: var(--miss);
+}
+
 main :last-child > h2 {
   justify-self: end;
 }
 
 .player {
   display: grid;
-  grid-template-rows: 2rem 1fr;
+  grid-template-rows: 3rem 1fr;
   justify-content: center;
   align-self: center;
 }
