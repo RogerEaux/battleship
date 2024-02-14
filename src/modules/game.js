@@ -97,16 +97,16 @@ export function createGame() {
     renderShot(computer.gameboard, this);
     isWinner(human, computer);
 
-    setTimeout(() => {}, 500);
-
     //  Record and render computer attack
     const targetBoard = document.querySelector(`[data-player="1"]`).lastChild;
     const [x, y] = computer.blindFire(human.gameboard);
+    setTimeout(() => {
+      renderShot(
+        human.gameboard,
+        targetBoard.querySelector(`[data-row="${x}"][data-col="${y}"]`),
+      );
+    }, 500);
 
-    renderShot(
-      human.gameboard,
-      targetBoard.querySelector(`[data-row="${x}"][data-col="${y}"]`),
-    );
     isWinner(computer, human);
   }
 
