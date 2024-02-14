@@ -4,7 +4,12 @@
   --ship: #627790;
   --hit: #d82a31;
   --miss: #e7eef4;
-  --battleship: linear-gradient(var(--border), var(--ocean));
+  --gray: #323232;
+  --battleship: linear-gradient(
+    var(--miss) 45%,
+    var(--gray) 50%,
+    var(--ocean) 55%
+  );
   font-family: Helvetica, Arial, sans-serif;
 }
 
@@ -21,7 +26,7 @@ body {
     'main' 1fr
     'footer' max-content;
   height: 100vh;
-  background-color: var(--miss);
+  background-color: var(--gray);
 }
 
 header {
