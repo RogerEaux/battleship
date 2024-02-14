@@ -199,6 +199,7 @@ export function createGame() {
   }
 
   function handleRandomStart() {
+    human.gameboard.reset();
     human.gameboard.placeRandom();
     handleGameStart();
   }
