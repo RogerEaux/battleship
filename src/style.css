@@ -134,7 +134,6 @@ main :last-child > h2 {
 
 .modal {
   height: 100%;
-  width: 50%;
   grid-area: main;
   align-self: center;
   justify-self: center;
@@ -148,10 +147,6 @@ main :last-child > h2 {
   border-radius: 5px;
   z-index: 2;
   visibility: hidden;
-}
-
-.visible {
-  visibility: visible;
 }
 
 .game-start {
@@ -186,6 +181,7 @@ main :last-child > h2 {
   grid-area: board;
 }
 
+.game-start > :nth-child(6),
 .game-start > :nth-child(5),
 .game-start > :last-child,
 .game-over :last-child {
@@ -206,9 +202,16 @@ main :last-child > h2 {
   background-color: var(--hit);
 }
 
+.game-start > :nth-child(6),
 .game-start > :last-child {
   grid-area: play;
   font-size: 1.2rem;
+  visibility: hidden;
+}
+
+.game-start > :nth-child(6).visible,
+.game-start > :last-child.visible {
+  visibility: visible;
 }
 
 .game-start .board {
