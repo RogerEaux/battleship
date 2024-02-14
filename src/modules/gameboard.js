@@ -56,7 +56,7 @@ export function createGameboard() {
       //  Shyps cant have other shyps touching them
       for (let i = start; i < end; i += 1) {
         //  Ship on ship violence
-        if (boardGrid[y][y + i]) return false;
+        if (boardGrid[x][y + i]) return false;
 
         //  Top
         if (x > 0) {
