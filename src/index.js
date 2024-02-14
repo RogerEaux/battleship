@@ -1,5 +1,8 @@
-import { createContent } from './modules/UI';
-import { gameLoop } from './modules/gameLoop';
+import { createContent, renderGameOver } from './modules/UI';
+import { createGame } from './modules/game';
 
 createContent();
-gameLoop();
+
+const game = createGame();
+
+game.startGame();
