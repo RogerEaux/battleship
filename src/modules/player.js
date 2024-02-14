@@ -1,7 +1,7 @@
 import { createGameboard } from './gameboard';
 
 export function createPlayer(name) {
-  const playerName = name;
+  let playerName = name;
   const playerGameboard = createGameboard();
   const attackedSpots = [];
 

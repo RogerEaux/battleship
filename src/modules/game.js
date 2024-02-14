@@ -3,6 +3,7 @@ import {
   renderGameboard,
   renderGameOver,
   renderGameStart,
+  renderName,
   renderShot,
   resetGameboard,
 } from './UI';
@@ -85,6 +86,12 @@ export function createGame() {
     renderGameboard(
       document.querySelector('[data-player="1"]').lastChild,
       human.gameboard,
+    );
+    human.name = document.querySelector('.game-start > :nth-child(2)').value;
+    renderName(document.querySelector('[data-player="1"]').firstChild, human);
+    renderName(
+      document.querySelector('[data-player="2"]').firstChild,
+      computer,
     );
   }
 
