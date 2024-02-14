@@ -139,9 +139,11 @@ function createGame() {
   function handlePlace() {
     const x = parseInt(this.getAttribute('data-row'), 10);
     const y = parseInt(this.getAttribute('data-col'), 10);
-    let length = places > 2 ? places : places + 1;
+    let length;
 
-    length = places === 0 ? 0 : places + 1;
+    if (places > 2) length = places;
+    else if (places === 0) length = 0;
+    else length = places + 1;
 
     if (human.gameboard.place(length, [x, y], vertical)) {
       renderPlace(this, vertical, places);

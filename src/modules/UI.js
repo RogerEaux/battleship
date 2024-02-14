@@ -166,9 +166,11 @@ export function renderPlace(square, vertical, places) {
   const y = parseInt(square.getAttribute('data-col'), 10);
   const place = document.querySelector('.game-start > :nth-child(3)');
   const ships = ['Destroyer', 'Submarine', 'Cruiser', 'Battleship'];
-  let length = places > 2 ? places : places + 1;
+  let length;
 
-  length = places === 0 ? 0 : places + 1;
+  if (places > 2) length = places;
+  else if (places === 0) length = 0;
+  else length = places + 1;
 
   if (places === 1) {
     place.textContent = 'Get Ready for BATTLE';
@@ -196,9 +198,11 @@ export function renderPlace(square, vertical, places) {
 export function renderPreview(square, vertical, places) {
   const x = parseInt(square.getAttribute('data-row'), 10);
   const y = parseInt(square.getAttribute('data-col'), 10);
-  let length = places > 2 ? places : places + 1;
+  let length;
 
-  length = places === 0 ? 0 : places + 1;
+  if (places > 2) length = places;
+  else if (places === 0) length = 0;
+  else length = places + 1;
 
   for (let i = 0; i < 10; i += 1) {
     for (let j = 0; j < 10; j += 1) {
