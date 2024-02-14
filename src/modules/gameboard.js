@@ -18,7 +18,7 @@ export function createGameboard() {
     return grid;
   }
 
-  function isValidPlace(length, coords) {
+  function isValidPlace(length, coords, vertical) {
     const [x, y] = coords;
 
     //  Coords outside board
@@ -27,31 +27,53 @@ export function createGameboard() {
     }
 
     //  Ship overflows outside board
-    if (x + length > 10) return false;
+    if (!vertical) {
+      if (x + length > 10) return false;
 
-    const start = x === 0 ? 0 : -1;
-    const end = x + length === 10 ? length : length + 1;
+      const start = x === 0 ? 0 : -1;
+      const end = x + length === 10 ? length : length + 1;
 
-    //  Shyps cant have other shyps touching them
-    for (let i = start; i < end; i += 1) {
-      //  Ship on ship violence
-      if (boardGrid[x + i][y]) return false;
+      //  Shyps cant have other shyps touching them
+      for (let i = start; i < end; i += 1) {
+        //  Ship on ship violence
+        if (boardGrid[x + i][y]) return false;
 
-      //  Top
-      if (y > 0) {
-        if (boardGrid[x + i][y - 1]) return false;
+        //  Top
+        if (y > 0) {
+          if (boardGrid[x + i][y - 1]) return false;
+        }
+        //  Bottom
+        if (y < 9) {
+          if (boardGrid[x + i][y + 1]) return false;
+        }
       }
-      //  Bottom
-      if (y < 9) {
-        if (boardGrid[x + i][y + 1]) return false;
+    } else {
+      if (y + length > 10) return false;
+
+      const start = y === 0 ? 0 : -1;
+      const end = y + length === 10 ? length : length + 1;
+
+      //  Shyps cant have other shyps touching them
+      for (let i = start; i < end; i += 1) {
+        //  Ship on ship violence
+        if (boardGrid[y][y + i]) return false;
+
+        //  Top
+        if (x > 0) {
+          if (boardGrid[x - 1][y + i]) return false;
+        }
+        //  Bottom
+        if (x < 9) {
+          if (boardGrid[x + 1][y + i]) return false;
+        }
       }
     }
 
     return true;
   }
 
-  function place(length, coords) {
-    if (!isValidPlace(length, coords)) return false;
+  function place(length, coords, vertical = false) {
+    if (!isValidPlace(length, coords, vertical)) return false;
 
     const ship = createShip(length);
     const [x, y] = coords;
@@ -59,8 +81,14 @@ export function createGameboard() {
     activeShips.push(ship);
 
     //  Place ship on given coords
-    for (let i = 0; i < length; i += 1) {
-      boardGrid[x + i][y] = ship;
+    if (!vertical) {
+      for (let i = 0; i < length; i += 1) {
+        boardGrid[x + i][y] = ship;
+      }
+    } else {
+      for (let i = 0; i < length; i += 1) {
+        boardGrid[x][y + i] = ship;
+      }
     }
 
     return true;
