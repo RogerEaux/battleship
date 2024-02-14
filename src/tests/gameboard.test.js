@@ -31,6 +31,16 @@ describe('Gameboard tests', () => {
     expect(gameboard.grid[2][0].toString()).toEqual(ship.toString());
   });
 
+  test('Ships can be placed vertically', () => {
+    let ship = createShip(3);
+
+    gameboard.place(3, [0, 0], true);
+
+    expect(gameboard.grid[0][0].toString()).toEqual(ship.toString());
+    expect(gameboard.grid[0][1].toString()).toEqual(ship.toString());
+    expect(gameboard.grid[0][2].toString()).toEqual(ship.toString());
+  });
+
   test('Ships can be placed on the edge', () => {
     expect(gameboard.place(2, [8, 8])).toEqual(true);
     expect(gameboard.place(4, [6, 6])).toEqual(true);
