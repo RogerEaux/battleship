@@ -74,6 +74,7 @@ function createGameStartModal() {
   modal.classList = 'modal game-start';
   commander.textContent = 'Welcome to BATTLESHIP Commander';
   name.setAttribute('placeholder', 'Name...');
+  place.textContent = 'Place Your Carrier';
   random.textContent = 'Randomize Me';
   gameStart.textContent = 'Bombs Away!';
 
@@ -119,9 +120,7 @@ export function renderGameboard(DOMBoard, gameboard) {
       const square = DOMBoard.querySelector(
         `[data-row="${i}"][data-col="${j}"]`,
       );
-      if (playerNumber === 1) {
-        square.classList.add('inactive');
-      }
+      square.classList.add('inactive');
       if (gameboard.grid[i][j] && gameboard.grid[i][j] !== true) {
         square.classList.add('ship');
       }
