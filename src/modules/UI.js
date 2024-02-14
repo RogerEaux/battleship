@@ -20,7 +20,7 @@ function createBoard() {
     for (let j = 0; j < 10; j += 1) {
       const square = document.createElement('div');
 
-      square.classList = `square ocean`;
+      square.classList = 'square ocean';
       square.setAttribute('data-col', i);
       square.setAttribute('data-row', j);
 
@@ -159,4 +159,69 @@ export function resetGameboard(DOMPlayer) {
   const replacementBoard = createBoard();
 
   DOMPlayer.replaceChild(replacementBoard, DOMPlayer.querySelector('.board'));
+}
+
+export function renderPlace(square, vertical, places) {
+  const x = parseInt(square.getAttribute('data-row'), 10);
+  const y = parseInt(square.getAttribute('data-col'), 10);
+  const place = document.querySelector('.game-start > :nth-child(3)');
+  const ships = ['Destroyer', 'Submarine', 'Cruiser', 'Battleship'];
+  let length = places > 2 ? places : places + 1;
+
+  length = places === 0 ? 0 : places + 1;
+
+  if (places === 1) {
+    place.textContent = 'Get Ready for BATTLE';
+  } else {
+    place.textContent = `Place Your ${ships[places - 2]}`;
+  }
+
+  for (let i = 0; i < length; i += 1) {
+    if (!vertical && x + i < 10) {
+      const shipSquare = square.parentNode.querySelector(
+        `[data-row="${x + i}"][data-col="${y}"]`,
+      );
+
+      shipSquare.classList.add('ship');
+    } else if (y + i < 10) {
+      const shipSquare = square.parentNode.querySelector(
+        `[data-row="${x}"][data-col="${y + i}"]`,
+      );
+
+      shipSquare.classList.add('ship');
+    }
+  }
+}
+
+export function renderPreview(square, vertical, places) {
+  const x = parseInt(square.getAttribute('data-row'), 10);
+  const y = parseInt(square.getAttribute('data-col'), 10);
+  let length = places > 2 ? places : places + 1;
+
+  length = places === 0 ? 0 : places + 1;
+
+  for (let i = 0; i < 10; i += 1) {
+    for (let j = 0; j < 10; j += 1) {
+      const previewSquare = square.parentNode.querySelector(
+        `[data-row="${i}"][data-col="${j}"]`,
+      );
+      previewSquare.classList.remove('preview');
+    }
+  }
+
+  for (let i = 0; i < length; i += 1) {
+    if (!vertical && x + i < 10) {
+      const previewSquare = square.parentNode.querySelector(
+        `[data-row="${x + i}"][data-col="${y}"]`,
+      );
+
+      previewSquare.classList.add('preview');
+    } else if (vertical && y + i < 10) {
+      const previewSquare = square.parentNode.querySelector(
+        `[data-row="${x}"][data-col="${y + i}"]`,
+      );
+
+      previewSquare.classList.add('preview');
+    }
+  }
 }
