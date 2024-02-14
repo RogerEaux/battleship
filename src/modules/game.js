@@ -7,6 +7,7 @@ import {
   renderName,
   renderPlace,
   renderPreview,
+  renderRotateButton,
   renderShot,
   resetGameboard,
 } from './UI';
@@ -154,7 +155,8 @@ function createGame() {
   }
 
   function addStartBoardListeners(DOMBoard) {
-    const gameStart = document.querySelector('.game-start > :last-child');
+    const rotateButton = document.querySelector('.game-start > :nth-child(6)');
+    const gameStartButton = document.querySelector('.game-start > :last-child');
 
     for (let i = 0; i < 10; i += 1) {
       for (let j = 0; j < 10; j += 1) {
@@ -168,7 +170,8 @@ function createGame() {
     }
 
     DOMBoard.addEventListener('contextmenu', handleRotate);
-    gameStart.addEventListener('click', handleGameStart);
+    rotateButton.addEventListener('click', handleRotate);
+    gameStartButton.addEventListener('click', handleGameStart);
   }
 
   function handleRandomStart() {
@@ -192,6 +195,7 @@ function createGame() {
 
   function startGame() {
     renderGameStart();
+    renderRotateButton();
     placeShips(document.querySelector('.game-start > :nth-child(4)'));
   }
 
