@@ -62,6 +62,23 @@ function createFooter() {
   return footer;
 }
 
+function createGameStartModal() {
+  const modal = document.createElement('div');
+  const gameStart = document.createElement('p');
+  const name = document.createElement('input');
+  const board = createBoard();
+  const play = document.createElement('button');
+
+  modal.classList = 'modal game-start';
+  gameStart.textContent = 'Welcome to BATTLESHIP Commander';
+  name.setAttribute('placeholder', 'Name...');
+  play.textContent = 'Bombs away!';
+
+  modal.append(gameStart, name, board, play);
+
+  return modal;
+}
+
 function createGameOverModal() {
   const modal = document.createElement('div');
   const gameOver = document.createElement('p');
@@ -84,6 +101,7 @@ export function createContent() {
     createHeader(),
     createMain(),
     createFooter(),
+    createGameStartModal(),
     createGameOverModal(),
   );
 }
