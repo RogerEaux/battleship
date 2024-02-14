@@ -12,6 +12,7 @@ export function createGame() {
   const human = createPlayer('Human');
   const computer = createPlayer('Computer');
   let places = 5;
+  let vertical = false;
 
   function handlePlace() {
     const x = parseInt(this.getAttribute('data-row'));
@@ -21,13 +22,19 @@ export function createGame() {
     const place = document.querySelector('.game-start > :nth-child(3)');
     const ships = ['Destroyer', 'Submarine', 'Cruiser', 'Battleship'];
 
-    if (human.gameboard.place(length, coords)) {
+    if (human.gameboard.place(length, coords, vertical)) {
       place.textContent = `Place Your ${ships[places - 2]}`;
       places -= 1;
       for (let i = 0; i < length; i += 1) {
-        if (x + i < 10) {
+        if (!vertical && x + i < 10) {
           const square = this.parentNode.querySelector(
             `[data-row="${x + i}"][data-col="${y}"]`,
+          );
+
+          square.classList.add('ship');
+        } else if (y + i < 10) {
+          const square = this.parentNode.querySelector(
+            `[data-row="${x}"][data-col="${y + i}"]`,
           );
 
           square.classList.add('ship');
@@ -56,14 +63,25 @@ export function createGame() {
     }
 
     for (let i = 0; i < length; i += 1) {
-      if (x + i < 10) {
+      if (!vertical && x + i < 10) {
         const square = this.parentNode.querySelector(
           `[data-row="${x + i}"][data-col="${y}"]`,
         );
 
         square.classList.add('preview');
+      } else if (y + i < 10) {
+        const square = this.parentNode.querySelector(
+          `[data-row="${x}"][data-col="${y + i}"]`,
+        );
+
+        square.classList.add('preview');
       }
     }
+  }
+
+  function handleRotate(event) {
+    event.preventDefault();
+    vertical = vertical ? false : true;
   }
 
   function addStartBoardListeners() {
@@ -79,6 +97,8 @@ export function createGame() {
         square.addEventListener('mouseover', handlePreview);
       }
     }
+
+    targetBoard.addEventListener('contextmenu', handleRotate);
   }
 
   function isWinner(player, opponent) {
