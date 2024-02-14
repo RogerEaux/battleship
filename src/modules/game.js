@@ -144,14 +144,16 @@ export function createGame() {
     human.gameboard.reset();
     computer.reset();
     computer.gameboard.reset();
-    resetGameboard(1);
-    resetGameboard(2);
+    resetGameboard(document.querySelector('[data-player="1"]'));
+    resetGameboard(document.querySelector('[data-player="2"]'));
+    resetGameboard(document.querySelector('.game-start'));
+    places = 5;
   }
 
   function handleReplay() {
     renderGameOver();
     reset();
-    renderGameStart();
+    startGame();
   }
 
   function addReplayListener() {

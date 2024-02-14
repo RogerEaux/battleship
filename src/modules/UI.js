@@ -155,9 +155,8 @@ export function renderGameOver(winnerName) {
   name.textContent = `Total ${winnerName} Domination`;
 }
 
-export function resetGameboard(playerNumber) {
-  const DOMPlayer = document.querySelector(`[data-player="${playerNumber}"]`);
+export function resetGameboard(DOMPlayer) {
   const replacementBoard = createBoard();
 
-  DOMPlayer.replaceChild(replacementBoard, DOMPlayer.lastChild);
+  DOMPlayer.replaceChild(replacementBoard, DOMPlayer.querySelector('.board'));
 }
