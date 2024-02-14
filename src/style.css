@@ -155,20 +155,32 @@ main :last-child > h2 {
 }
 
 .game-start {
+  grid-template:
+    'start start' 3rem
+    'name name' 2rem
+    'board board' 1fr
+    'random play' 4rem;
   visibility: visible;
 }
 
-.game-start :first-child {
+.game-start > :first-child {
+  grid-area: start;
   font-size: 1.5rem;
   color: var(--gray);
   font-weight: 700;
 }
 
-.game-start :nth-child(2) {
+.game-start > :nth-child(2) {
+  grid-area: name;
   font-size: 1rem;
   padding: 4px;
 }
 
+.game-start > :nth-child(3) {
+  grid-area: board;
+}
+
+.game-start > :nth-child(4),
 .game-start > :last-child,
 .game-over :last-child {
   height: max-content;
@@ -182,7 +194,14 @@ main :last-child > h2 {
   border-radius: 5px;
 }
 
+.game-start > :nth-child(4) {
+  grid-area: random;
+  font-size: 1.2rem;
+  background-color: var(--hit);
+}
+
 .game-start > :last-child {
+  grid-area: play;
   font-size: 1.2rem;
 }
 
@@ -191,19 +210,24 @@ main :last-child > h2 {
   grid-template-rows: repeat(10, 25px);
 }
 
-.game-over :first-child {
+.game-over > :first-child {
   font-size: 4rem;
   color: var(--hit);
   font-weight: 700;
 }
 
-.game-over :nth-child(2) {
+.game-over > :nth-child(2) {
   font-size: 2rem;
   color: var(--ocean);
   font-weight: 700;
 }
 
-.modal :last-child:hover {
+.game-start > :nth-child(4):hover {
+  background-color: rgba(216, 42, 49, 0.8);
+}
+
+.game-start > :last-child:hover,
+.game-over > :last-child:hover {
   background-color: rgba(98, 119, 144, 0.8);
 }
 
