@@ -69,6 +69,7 @@ function createGameStartModal() {
   const place = document.createElement('p');
   const board = createBoard();
   const random = document.createElement('button');
+  const rotate = document.createElement('button');
   const gameStart = document.createElement('button');
 
   modal.classList = 'modal game-start';
@@ -76,9 +77,10 @@ function createGameStartModal() {
   name.setAttribute('placeholder', 'Name...');
   place.textContent = 'Place Your Carrier';
   random.textContent = 'Randomize Me';
+  rotate.textContent = 'Rotate Me';
   gameStart.textContent = 'Bombs Away!';
 
-  modal.append(commander, name, place, board, random, gameStart);
+  modal.append(commander, name, place, board, random, rotate, gameStart);
 
   return modal;
 }
@@ -171,6 +173,12 @@ function getShipLength(places) {
   return length;
 }
 
+export function renderRotateButton() {
+  const rotateButton = document.querySelector('.game-start > :nth-child(6)');
+
+  rotateButton.classList.toggle('visible');
+}
+
 export function renderGameStartButton() {
   const gameStartButton = document.querySelector('.game-start > :last-child ');
 
@@ -187,6 +195,7 @@ export function renderPlace(square, vertical, places) {
   if (places === 1) {
     place.textContent = 'Get Ready for BATTLE';
     renderGameStartButton();
+    renderRotateButton();
   } else {
     place.textContent = `Place Your ${ships[places - 2]}`;
   }
