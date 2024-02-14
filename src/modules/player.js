@@ -44,6 +44,10 @@ export function createPlayer(name) {
       return playerName;
     },
 
+    set name(newName) {
+      playerName = newName;
+    },
+
     get gameboard() {
       return playerGameboard;
     },
