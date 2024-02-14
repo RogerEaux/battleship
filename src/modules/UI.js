@@ -67,14 +67,16 @@ function createGameStartModal() {
   const gameStart = document.createElement('p');
   const name = document.createElement('input');
   const board = createBoard();
+  const random = document.createElement('button');
   const play = document.createElement('button');
 
   modal.classList = 'modal game-start';
   gameStart.textContent = 'Welcome to BATTLESHIP Commander';
   name.setAttribute('placeholder', 'Name...');
-  play.textContent = 'Bombs away!';
+  random.textContent = 'Randomize Me';
+  play.textContent = 'Bombs Away!';
 
-  modal.append(gameStart, name, board, play);
+  modal.append(gameStart, name, board, random, play);
 
   return modal;
 }
@@ -145,6 +147,12 @@ export function renderShot(gameboard, square) {
   } else if (gameboard.grid[i][j] === false) {
     square.classList.add('miss');
   }
+}
+
+export function renderGameStart() {
+  const modal = document.querySelector('.game-start');
+
+  modal.classList.toggle('visible');
 }
 
 export function renderGameOver(winnerName) {
