@@ -67,6 +67,35 @@ export function createGameboard() {
     return true;
   }
 
+  function generateRandomCoords() {
+    const coords = [];
+
+    for (let i = 0; i < 2; i += 1) {
+      coords[i] = Math.floor(Math.random() * 10);
+    }
+
+    return coords;
+  }
+
+  function placeRandom() {
+    const shipLengths = [5, 4, 3, 3, 2];
+    const allCoords = [];
+
+    for (let i = 0; i < shipLengths.length; i += 1) {
+      let coords = generateRandomCoords();
+      let valid = isValidPlace(shipLengths[i], coords);
+      while (!valid) {
+        coords = generateRandomCoords();
+        valid = isValidPlace(shipLengths[i], coords);
+      }
+
+      allCoords.push(coords);
+      place(shipLengths[i], coords);
+    }
+
+    return allCoords;
+  }
+
   function receiveAttack(coords) {
     const [x, y] = coords;
 
@@ -104,6 +133,7 @@ export function createGameboard() {
     },
 
     place,
+    placeRandom,
     receiveAttack,
     areAllSunk,
     reset,
