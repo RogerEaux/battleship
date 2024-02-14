@@ -58,6 +58,14 @@ describe('Gameboard tests', () => {
     expect(gameboard.place(3, [2, 2])).toEqual(false);
   });
 
+  test('Ships are placed randomly', () => {
+    const allCoords = gameboard.placeRandom();
+
+    for (let i = 0; i < allCoords.length; i += 1) {
+      expect(gameboard.grid[allCoords[i][0]][allCoords[i][1]]).not.toBeNull();
+    }
+  });
+
   test('Attack miss is recorded', () => {
     expect(gameboard.receiveAttack([0, 0])).toEqual(false);
     expect(gameboard.grid[0][0]).toStrictEqual(false);
