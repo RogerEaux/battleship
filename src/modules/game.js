@@ -3,6 +3,7 @@ import {
   renderGameboard,
   renderGameOver,
   renderGameStart,
+  renderGameStartButton,
   renderName,
   renderPlace,
   renderPreview,
@@ -123,6 +124,7 @@ function createGame() {
     }
 
     renderGameStart();
+    renderGameStartButton();
     renderContent();
     addListeners();
   }

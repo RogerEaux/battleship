@@ -170,6 +170,13 @@ function getShipLength(places) {
 
   return length;
 }
+
+export function renderGameStartButton() {
+  const gameStartButton = document.querySelector('.game-start > :last-child ');
+
+  gameStartButton.classList.toggle('visible');
+}
+
 export function renderPlace(square, vertical, places) {
   const x = parseInt(square.getAttribute('data-row'), 10);
   const y = parseInt(square.getAttribute('data-col'), 10);
@@ -179,6 +186,7 @@ export function renderPlace(square, vertical, places) {
 
   if (places === 1) {
     place.textContent = 'Get Ready for BATTLE';
+    renderGameStartButton();
   } else {
     place.textContent = `Place Your ${ships[places - 2]}`;
   }
@@ -203,11 +211,7 @@ export function renderPlace(square, vertical, places) {
 export function renderPreview(square, vertical, places) {
   const x = parseInt(square.getAttribute('data-row'), 10);
   const y = parseInt(square.getAttribute('data-col'), 10);
-  let length;
-
-  if (places > 2) length = places;
-  else if (places === 0) length = 0;
-  else length = places + 1;
+  const length = getShipLength(places);
 
   for (let i = 0; i < 10; i += 1) {
     for (let j = 0; j < 10; j += 1) {
