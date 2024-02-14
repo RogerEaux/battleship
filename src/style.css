@@ -147,6 +147,11 @@ main :last-child > h2 {
   border: 4px solid var(--ocean);
   border-radius: 5px;
   z-index: 2;
+  visibility: hidden;
+}
+
+.visible {
+  visibility: visible;
 }
 
 .modal :first-child {
