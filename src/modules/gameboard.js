@@ -29,22 +29,21 @@ export function createGameboard() {
     //  Ship overflows outside board
     if (x + length > 10) return false;
 
-    //  Ship on ship violence
-    for (let i = 0; i < length; i += 1) {
-      if (boardGrid[x + i][y]) return false;
-    }
-
-    //  Shyps cant have other shyps touching them
     const start = x === 0 ? 0 : -1;
-
     const end = x + length === 10 ? length : length + 1;
 
+    //  Shyps cant have other shyps touching them
     for (let i = start; i < end; i += 1) {
+      //  Ship on ship violence
+      if (boardGrid[x + i][y]) return false;
+
+      //  Top
       if (y > 0) {
-        if (boardGrid[x + i][y + 1]) return false;
-      }
-      if (y < 9) {
         if (boardGrid[x + i][y - 1]) return false;
+      }
+      //  Bottom
+      if (y < 9) {
+        if (boardGrid[x + i][y + 1]) return false;
       }
     }
 
