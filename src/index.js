@@ -1,5 +1,5 @@
-import { createContent, renderGameOver } from './modules/UI';
-import { createGame } from './modules/game';
+import { createContent } from './modules/UI';
+import createGame from './modules/game';
 
 createContent();
 
