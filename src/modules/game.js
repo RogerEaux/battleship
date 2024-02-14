@@ -177,6 +177,8 @@ function createGame() {
   function handleRandomStart() {
     human.gameboard.reset();
     human.gameboard.placeRandom();
+    renderGameStartButton();
+    renderRotateButton();
     handleGameStart();
   }
 
