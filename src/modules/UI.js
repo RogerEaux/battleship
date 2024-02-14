@@ -64,19 +64,20 @@ function createFooter() {
 
 function createGameStartModal() {
   const modal = document.createElement('div');
-  const gameStart = document.createElement('p');
+  const commander = document.createElement('p');
   const name = document.createElement('input');
+  const place = document.createElement('p');
   const board = createBoard();
   const random = document.createElement('button');
-  const play = document.createElement('button');
+  const gameStart = document.createElement('button');
 
   modal.classList = 'modal game-start';
-  gameStart.textContent = 'Welcome to BATTLESHIP Commander';
+  commander.textContent = 'Welcome to BATTLESHIP Commander';
   name.setAttribute('placeholder', 'Name...');
   random.textContent = 'Randomize Me';
-  play.textContent = 'Bombs Away!';
+  gameStart.textContent = 'Bombs Away!';
 
-  modal.append(gameStart, name, board, random, play);
+  modal.append(commander, name, place, board, random, gameStart);
 
   return modal;
 }
@@ -108,19 +109,11 @@ export function createContent() {
   );
 }
 
-export function renderName(playerNumber, player) {
-  const DOMName = document.querySelector(
-    `[data-player="${playerNumber}"]`,
-  ).firstChild;
-
+export function renderName(DOMName, player) {
   DOMName.textContent = player.name;
 }
 
-export function renderGameboard(playerNumber, gameboard) {
-  const DOMBoard = document.querySelector(
-    `[data-player="${playerNumber}"]`,
-  ).lastChild;
-
+export function renderGameboard(DOMBoard, gameboard) {
   for (let i = 0; i < 10; i += 1) {
     for (let j = 0; j < 10; j += 1) {
       const square = DOMBoard.querySelector(
