@@ -1,5 +1,11 @@
 import { createPlayer } from './player';
-import { renderGameboard, renderGameOver, renderName, renderShot } from './UI';
+import {
+  renderGameboard,
+  renderGameOver,
+  renderName,
+  renderShot,
+  resetGameboard,
+} from './UI';
 
 export function createGame() {
   const human = createPlayer('Human');
@@ -61,16 +67,45 @@ export function createGame() {
     }
   }
 
+  function reset() {
+    human.reset();
+    human.gameboard.reset();
+    computer.reset();
+    computer.gameboard.reset();
+    resetGameboard(1);
+    resetGameboard(2);
+  }
+
+  function handleReplay() {
+    renderGameOver();
+    reset();
+    renderGameboard(1, human.gameboard);
+    placeShips();
+    renderGameboard(1, human.gameboard);
+    addAttackListeners();
+  }
+
+  function addReplayListener() {
+    const playAgain = document.querySelector('.game-over button');
+
+    playAgain.addEventListener('click', handleReplay);
+  }
+
   function renderContent() {
     renderGameboard(1, human.gameboard);
     renderName(1, human);
     renderName(2, computer);
   }
 
+  function addListeners() {
+    addAttackListeners();
+    addReplayListener();
+  }
+
   function startGame() {
     placeShips();
     renderContent();
-    addAttackListeners();
+    addListeners();
   }
 
   return {
