@@ -154,19 +154,23 @@ main :last-child > h2 {
   visibility: visible;
 }
 
-.modal :first-child {
-  font-size: 4rem;
-  color: var(--hit);
+.game-start {
+  visibility: visible;
+}
+
+.game-start :first-child {
+  font-size: 1.5rem;
+  color: var(--gray);
   font-weight: 700;
 }
 
-.modal :nth-child(2) {
-  font-size: 2rem;
-  color: var(--ocean);
-  font-weight: 700;
+.game-start :nth-child(2) {
+  font-size: 1rem;
+  padding: 4px;
 }
 
-.modal :last-child {
+.game-start > :last-child,
+.game-over :last-child {
   height: max-content;
   font-size: 1.5rem;
   font-weight: 700;
@@ -176,6 +180,27 @@ main :last-child > h2 {
   padding: 16px;
   border: none;
   border-radius: 5px;
+}
+
+.game-start > :last-child {
+  font-size: 1.2rem;
+}
+
+.game-start .board {
+  grid-template-columns: repeat(10, 25px);
+  grid-template-rows: repeat(10, 25px);
+}
+
+.game-over :first-child {
+  font-size: 4rem;
+  color: var(--hit);
+  font-weight: 700;
+}
+
+.game-over :nth-child(2) {
+  font-size: 2rem;
+  color: var(--ocean);
+  font-weight: 700;
 }
 
 .modal :last-child:hover {
