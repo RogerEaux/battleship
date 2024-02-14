@@ -62,10 +62,30 @@ function createFooter() {
   return footer;
 }
 
+function createGameOverModal() {
+  const modal = document.createElement('div');
+  const gameOver = document.createElement('p');
+  const winner = document.createElement('p');
+  const playAgain = document.createElement('button');
+
+  modal.classList = 'modal game-over';
+  gameOver.textContent = 'GAME OVER';
+  playAgain.textContent = 'Play Again?';
+
+  modal.append(gameOver, winner, playAgain);
+
+  return modal;
+}
+
 export function createContent() {
   const body = document.querySelector('body');
 
-  body.append(createHeader(), createMain(), createFooter());
+  body.append(
+    createHeader(),
+    createMain(),
+    createFooter(),
+    createGameOverModal(),
+  );
 }
 
 export function renderName(playerNumber, player) {
@@ -109,25 +129,17 @@ export function renderShot(gameboard, square) {
   }
 }
 
-function createGameOverModal(winnerName) {
-  const modal = document.createElement('div');
-  const gameOver = document.createElement('p');
-  const winner = document.createElement('p');
-  const playAgain = document.createElement('button');
+export function renderGameOver(winnerName) {
+  const modal = document.querySelector('.game-over');
+  const name = modal.querySelector('p + p');
 
-  modal.classList = 'modal game-over';
-  gameOver.textContent = 'GAME OVER';
-  winner.textContent = `Total ${winnerName} Domination`;
-  playAgain.textContent = 'Play Again?';
-
-  modal.append(gameOver, winner, playAgain);
-
-  return modal;
+  modal.classList.toggle('visible');
+  name.textContent = `Total ${winnerName} Domination`;
 }
 
-export function renderGameOver(winner) {
-  const body = document.querySelector('body');
-  const modal = createGameOverModal(winner);
+export function resetGameboard(playerNumber) {
+  const DOMPlayer = document.querySelector(`[data-player="${playerNumber}"]`);
+  const replacementBoard = createBoard();
 
-  body.append(modal);
+  DOMPlayer.replaceChild(replacementBoard, DOMPlayer.lastChild);
 }
