@@ -109,15 +109,16 @@ export function createGameboard() {
     const allCoords = [];
 
     for (let i = 0; i < shipLengths.length; i += 1) {
+      let vertical = Math.floor(Math.random() * 2) === 1 ? true : false;
       let coords = generateRandomCoords();
-      let valid = isValidPlace(shipLengths[i], coords);
+      let valid = isValidPlace(shipLengths[i], coords, vertical);
       while (!valid) {
         coords = generateRandomCoords();
-        valid = isValidPlace(shipLengths[i], coords);
+        valid = isValidPlace(shipLengths[i], coords, vertical);
       }
 
       allCoords.push(coords);
-      place(shipLengths[i], coords);
+      place(shipLengths[i], coords, vertical);
     }
 
     return allCoords;
