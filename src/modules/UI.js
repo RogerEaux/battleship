@@ -161,16 +161,21 @@ export function resetGameboard(DOMPlayer) {
   DOMPlayer.replaceChild(replacementBoard, DOMPlayer.querySelector('.board'));
 }
 
-export function renderPlace(square, vertical, places) {
-  const x = parseInt(square.getAttribute('data-row'), 10);
-  const y = parseInt(square.getAttribute('data-col'), 10);
-  const place = document.querySelector('.game-start > :nth-child(3)');
-  const ships = ['Destroyer', 'Submarine', 'Cruiser', 'Battleship'];
+function getShipLength(places) {
   let length;
 
   if (places > 2) length = places;
   else if (places === 0) length = 0;
   else length = places + 1;
+
+  return length;
+}
+export function renderPlace(square, vertical, places) {
+  const x = parseInt(square.getAttribute('data-row'), 10);
+  const y = parseInt(square.getAttribute('data-col'), 10);
+  const place = document.querySelector('.game-start > :nth-child(3)');
+  const ships = ['Destroyer', 'Submarine', 'Cruiser', 'Battleship'];
+  const length = getShipLength(places);
 
   if (places === 1) {
     place.textContent = 'Get Ready for BATTLE';
