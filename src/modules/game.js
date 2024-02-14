@@ -81,29 +81,9 @@ export function createGame() {
     }
   }
 
-  function handleGameStart() {
-    renderGameStart();
-    renderGameboard(
-      document.querySelector('[data-player="1"]').lastChild,
-      human.gameboard,
-    );
-    human.name = document.querySelector('.game-start > :nth-child(2)').value;
-    renderName(document.querySelector('[data-player="1"]').firstChild, human);
-    renderName(
-      document.querySelector('[data-player="2"]').firstChild,
-      computer,
-    );
-  }
-
-  function addGameStartListener() {
-    const gameStart = document.querySelector('.game-start > :last-child');
-
-    gameStart.addEventListener('click', handleGameStart);
-  }
-
   function isWinner(player, opponent) {
     if (opponent.gameboard.areAllSunk()) {
-      renderGameOver();
+      renderGameOver(player.name);
       removeAttackListeners();
     }
   }
@@ -117,7 +97,7 @@ export function createGame() {
     renderShot(computer.gameboard, this);
     isWinner(human, computer);
 
-    //  Some cinematic showing computer counter attacking and delay
+    setTimeout(() => {}, 500);
 
     //  Record and render computer attack
     const targetBoard = document.querySelector(`[data-player="1"]`).lastChild;
@@ -158,17 +138,6 @@ export function createGame() {
     }
   }
 
-  function placeRandomShips() {
-    human.gameboard.placeRandom();
-    computer.gameboard.placeRandom();
-  }
-
-  function placeShips() {
-    addStartBoardListeners();
-
-    computer.gameboard.placeRandom();
-  }
-
   function reset() {
     //  Reset players, gameboards and DOM grids
     human.reset();
@@ -194,6 +163,55 @@ export function createGame() {
   function addListeners() {
     addAttackListeners();
     addReplayListener();
+  }
+
+  function renderContent() {
+    renderGameboard(
+      document.querySelector('[data-player="1"]').lastChild,
+      human.gameboard,
+    );
+
+    const name = document.querySelector('.game-start > :nth-child(2)').value;
+
+    if (name) {
+      human.name = name;
+    }
+
+    renderName(document.querySelector('[data-player="1"]').firstChild, human);
+    renderName(
+      document.querySelector('[data-player="2"]').firstChild,
+      computer,
+    );
+  }
+
+  function handleGameStart() {
+    renderGameStart();
+    renderContent();
+    addListeners();
+  }
+
+  function addGameStartListener() {
+    const gameStart = document.querySelector('.game-start > :last-child');
+
+    gameStart.addEventListener('click', handleGameStart);
+  }
+
+  function handleRandomStart() {
+    human.gameboard.placeRandom();
+    handleGameStart();
+  }
+
+  function addRandomPlaceListener() {
+    const gameRandom = document.querySelector('.game-start > :nth-child(5)');
+
+    gameRandom.addEventListener('click', handleRandomStart);
+  }
+
+  function placeShips() {
+    addStartBoardListeners();
+    addRandomPlaceListener();
+
+    computer.gameboard.placeRandom();
   }
 
   function startGame() {
