@@ -1,13 +1,14 @@
-import { createGameboard } from './gameboard';
+import createGameboard from './gameboard';
 
-export function createPlayer(name) {
+function createPlayer(name) {
   let playerName = name;
   const playerGameboard = createGameboard();
   const attackedSpots = [];
 
   function attack(enemyGameboard, coords) {
-    if (JSON.stringify(attackedSpots).includes(JSON.stringify(coords)))
+    if (JSON.stringify(attackedSpots).includes(JSON.stringify(coords))) {
       return null;
+    }
 
     enemyGameboard.receiveAttack(coords);
     attackedSpots.push(coords);
@@ -57,3 +58,5 @@ export function createPlayer(name) {
     reset,
   };
 }
+
+export default createPlayer;

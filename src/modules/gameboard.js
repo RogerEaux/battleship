@@ -1,11 +1,11 @@
-import { createShip } from './ships';
+import createShip from './ships';
 
-export function createGameboard() {
+function createGameboard() {
   const gridSize = 10;
-  const boardGrid = generateGrid(gridSize);
+  const boardGrid = generateGrid();
   const activeShips = [];
 
-  function generateGrid(gridSize) {
+  function generateGrid() {
     const grid = [];
 
     for (let i = 0; i < gridSize; i += 1) {
@@ -109,7 +109,7 @@ export function createGameboard() {
     const allCoords = [];
 
     for (let i = 0; i < shipLengths.length; i += 1) {
-      let vertical = Math.floor(Math.random() * 2) === 1 ? true : false;
+      const vertical = Math.floor(Math.random() * 2) === 1;
       let coords = generateRandomCoords();
       let valid = isValidPlace(shipLengths[i], coords, vertical);
       while (!valid) {
@@ -167,3 +167,5 @@ export function createGameboard() {
     reset,
   };
 }
+
+export default createGameboard;

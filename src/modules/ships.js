@@ -1,4 +1,4 @@
-export function createShip(length) {
+function createShip(length) {
   let hitPoints = length;
 
   function hit() {
@@ -17,3 +17,5 @@ export function createShip(length) {
     isSunk,
   };
 }
+
+export default createShip;

@@ -1,4 +1,4 @@
-import { createPlayer } from './player';
+import createPlayer from './player';
 import {
   renderGameboard,
   renderGameOver,
