@@ -48,25 +48,35 @@ function createPlayer(name) {
     }
 
     if (lastHit) {
-      const right = enemyGameboard.grid[lastHit[0] + 1][lastHit[1]];
-      const top = enemyGameboard.grid[lastHit[0]][lastHit[1] - 1];
-      const left = enemyGameboard.grid[lastHit[0] - 1][lastHit[1]];
-      const bottom = enemyGameboard.grid[lastHit[0]][lastHit[1] + 1];
+      let right = false;
+      let top = false;
+      let left = false;
+      let bottom = false;
 
-      if (lastHit[0] < 9 && right !== true && right !== false) {
-        //  Try attacking last hit's right
+      //  If adjacent spots are valid
+      if (lastHit[0] < 9) {
+        right = enemyGameboard.grid[lastHit[0] + 1][lastHit[1]];
+      }
+      if (lastHit[1] > 0) {
+        top = enemyGameboard.grid[lastHit[0]][lastHit[1] - 1];
+      }
+      if (lastHit[0] > 0) {
+        left = enemyGameboard.grid[lastHit[0] - 1][lastHit[1]];
+      }
+      if (lastHit[1] < 9) {
+        bottom = enemyGameboard.grid[lastHit[0]][lastHit[1] + 1];
+      }
+
+      //  Try attacking them
+      if (right !== true && right !== false) {
         return attack(enemyGameboard, [lastHit[0] + 1, lastHit[1]]);
-      } else if (lastHit[1] > 0 && top !== true && top !== false) {
-        //  Try attacking last hit's top
+      } else if (top !== true && top !== false) {
         return attack(enemyGameboard, [lastHit[0], lastHit[1] - 1]);
-      } else if (lastHit[0] > 0 && left !== true && left !== false) {
-        //  Try attacking last hit's left
+      } else if (left !== true && left !== false) {
         return attack(enemyGameboard, [lastHit[0] - 1, lastHit[1]]);
-      } else if (lastHit[1] < 9 && bottom !== true && bottom !== false) {
-        //  Try attacking last hit's bottom
+      } else if (bottom !== true && bottom !== false) {
         return attack(enemyGameboard, [lastHit[0], lastHit[1] + 1]);
       } else {
-        //  F it, just shoot
         return blindFire(enemyGameboard);
       }
     }
