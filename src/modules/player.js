@@ -38,11 +38,13 @@ function createPlayer(name) {
   }
 
   function smartFire(enemyGameboard) {
-    const [x, y] = attackedSpots[attackedSpots.length - 1];
+    if (attackedSpots.length > 0) {
+      const [x, y] = attackedSpots[attackedSpots.length - 1];
 
-    //  Get last hit
-    if (enemyGameboard.grid[x][y] === true) {
-      lastHit = [x, y];
+      //  Get last hit
+      if (enemyGameboard.grid[x][y] === true) {
+        lastHit = [x, y];
+      }
     }
 
     if (lastHit) {
@@ -68,6 +70,8 @@ function createPlayer(name) {
         return blindFire(enemyGameboard);
       }
     }
+
+    return blindFire(enemyGameboard);
   }
 
   function reset() {
