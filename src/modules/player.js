@@ -1,10 +1,11 @@
 import createGameboard from './gameboard';
 
 function createPlayer(name) {
-  let playerName = name;
   const playerGameboard = createGameboard();
   const attackedSpots = [];
+  let playerName = name;
   let lastHit;
+  let cheatIndex = 10;
 
   function attack(enemyGameboard, coords) {
     if (JSON.stringify(attackedSpots).includes(JSON.stringify(coords))) {
@@ -57,6 +58,10 @@ function createPlayer(name) {
   }
 
   function smartFire(enemyGameboard) {
+    if (attackedSpots.length % cheatIndex === 0) {
+      return cheat(enemyGameboard);
+    }
+
     if (attackedSpots.length > 0) {
       const [x, y] = attackedSpots[attackedSpots.length - 1];
 
@@ -128,6 +133,10 @@ function createPlayer(name) {
 
     get gameboard() {
       return playerGameboard;
+    },
+
+    set difficulty(newCheat) {
+      cheatIndex = newCheat;
     },
 
     attack,
