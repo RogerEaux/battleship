@@ -57,4 +57,16 @@ describe('Player tests', () => {
   test('Attack randomly if no last hit exists', () => {
     expect(hero.smartFire(enemy.gameboard)).toBeTruthy();
   });
+
+  test('Smart attack avoids edges', () => {
+    enemy.gameboard.place(3, [7, 0]);
+    hero.attack(enemy.gameboard, [9, 0]);
+    expect(hero.smartFire(enemy.gameboard)).toEqual([8, 0]);
+
+    enemy.gameboard.place(3, [0, 7], true);
+    hero.attack(enemy.gameboard, [0, 7]);
+    expect(hero.smartFire(enemy.gameboard)).toEqual([1, 7]);
+    expect(hero.smartFire(enemy.gameboard)).toEqual([0, 6]);
+    expect(hero.smartFire(enemy.gameboard)).toEqual([0, 8]);
+  });
 });
