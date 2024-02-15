@@ -37,6 +37,20 @@ function createPlayer(name) {
     return attack(enemyGameboard, coords);
   }
 
+  function smartPoke(enemyGameboard) {
+    let coords = generateRandomCoords();
+
+    //  Coords will only be in a cross pattern
+    while (
+      (coords[0] + coords[1]) % 2 !== 0 ||
+      JSON.stringify(attackedSpots).includes(JSON.stringify(coords))
+    ) {
+      coords = generateRandomCoords();
+    }
+
+    return attack(enemyGameboard, coords);
+  }
+
   function smartFire(enemyGameboard) {
     if (attackedSpots.length > 0) {
       const [x, y] = attackedSpots[attackedSpots.length - 1];
@@ -77,11 +91,11 @@ function createPlayer(name) {
       } else if (bottom !== true && bottom !== false) {
         return attack(enemyGameboard, [lastHit[0], lastHit[1] + 1]);
       } else {
-        return blindFire(enemyGameboard);
+        return smartPoke(enemyGameboard);
       }
     }
 
-    return blindFire(enemyGameboard);
+    return smartPoke(enemyGameboard);
   }
 
   function reset() {
