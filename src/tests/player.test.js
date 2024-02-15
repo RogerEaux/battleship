@@ -53,4 +53,8 @@ describe('Player tests', () => {
     expect(hero.smartFire(enemy.gameboard)).toEqual([5, 7]);
     expect(hero.smartFire(enemy.gameboard)).toEqual([6, 8]);
   });
+
+  test('Attack randomly if no last hit exists', () => {
+    expect(hero.smartFire(enemy.gameboard)).toBeTruthy();
+  });
 });
