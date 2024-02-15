@@ -66,6 +66,7 @@ function createGameStartModal() {
   const modal = document.createElement('div');
   const commander = document.createElement('p');
   const name = document.createElement('input');
+  const difficulty = document.createElement('button');
   const place = document.createElement('p');
   const board = createBoard();
   const random = document.createElement('button');
@@ -75,12 +76,22 @@ function createGameStartModal() {
   modal.classList = 'modal game-start';
   commander.textContent = 'Welcome to BATTLESHIP Commander';
   name.setAttribute('placeholder', 'Name...');
+  difficulty.textContent = 'Easy';
   place.textContent = 'Place Your Carrier';
   random.textContent = 'Randomize Me';
   rotate.textContent = 'Rotate Me';
   gameStart.textContent = 'Bombs Away!';
 
-  modal.append(commander, name, place, board, random, rotate, gameStart);
+  modal.append(
+    commander,
+    name,
+    difficulty,
+    place,
+    board,
+    random,
+    rotate,
+    gameStart,
+  );
 
   return modal;
 }
@@ -173,8 +184,21 @@ function getShipLength(places) {
   return length;
 }
 
+export function renderDiff(diffButton) {
+  if (diffButton.getAttribute('class') === 'hard') {
+    diffButton.classList = 'harder';
+    diffButton.textContent = 'Harder';
+  } else if (diffButton.getAttribute('class') === 'harder') {
+    diffButton.classList = '';
+    diffButton.textContent = 'Easy';
+  } else {
+    diffButton.classList = 'hard';
+    diffButton.textContent = 'Hard';
+  }
+}
+
 export function renderRotateButton() {
-  const rotateButton = document.querySelector('.game-start > :nth-child(6)');
+  const rotateButton = document.querySelector('.game-start > :nth-child(7)');
 
   rotateButton.classList.toggle('visible');
 }
@@ -188,7 +212,7 @@ export function renderGameStartButton() {
 export function renderPlace(square, vertical, places) {
   const x = parseInt(square.getAttribute('data-row'), 10);
   const y = parseInt(square.getAttribute('data-col'), 10);
-  const place = document.querySelector('.game-start > :nth-child(3)');
+  const place = document.querySelector('.game-start > :nth-child(4)');
   const ships = ['Destroyer', 'Submarine', 'Cruiser', 'Battleship'];
   const length = getShipLength(places);
 
