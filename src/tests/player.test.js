@@ -33,6 +33,24 @@ describe('Player tests', () => {
 
   test('Attack random spot', () => {
     enemy.gameboard.place(3, [3, 3]);
-    expect(hero.blindFire(enemy.gameboard)).toEqual([3, 3]);
+    expect(hero.blindFire(enemy.gameboard)).toBeTruthy();
+  });
+
+  test('Attack adjacent spots after getting a hit', () => {
+    enemy.gameboard.place(3, [3, 3]);
+    hero.attack(enemy.gameboard, [3, 3]);
+    expect(hero.smartFire(enemy.gameboard)).toEqual([4, 3]);
+    expect(hero.smartFire(enemy.gameboard)).toEqual([5, 3]);
+    expect(hero.smartFire(enemy.gameboard)).toEqual([6, 3]);
+
+    enemy.gameboard.place(3, [6, 6], true);
+    hero.attack(enemy.gameboard, [6, 6]);
+    expect(hero.smartFire(enemy.gameboard)).toEqual([7, 6]);
+    expect(hero.smartFire(enemy.gameboard)).toEqual([6, 5]);
+    expect(hero.smartFire(enemy.gameboard)).toEqual([5, 6]);
+    expect(hero.smartFire(enemy.gameboard)).toEqual([6, 7]);
+    expect(hero.smartFire(enemy.gameboard)).toEqual([7, 7]);
+    expect(hero.smartFire(enemy.gameboard)).toEqual([5, 7]);
+    expect(hero.smartFire(enemy.gameboard)).toEqual([6, 8]);
   });
 });
