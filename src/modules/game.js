@@ -60,7 +60,7 @@ function createGame() {
 
     //  Record and render computer attack
     const DOMBoard = document.querySelector('[data-player="1"]').lastChild;
-    const [x, y] = computer.blindFire(human.gameboard);
+    const [x, y] = computer.smartFire(human.gameboard);
     setTimeout(() => {
       renderShot(
         human.gameboard,
