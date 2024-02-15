@@ -321,12 +321,12 @@ footer {
   }
 
   .game-start {
-    grid-template:
-      'comm comm' 2rem
-      'name name' 1.5rem
-      'place place' 1.5rem
-      'board board' 1fr
-      'random play' 3rem;
+    grid-template-rows:
+      2rem
+      1.5rem
+      1.5rem
+      1fr
+      3rem;
   }
 
   .game-start > :first-child {
@@ -372,12 +372,12 @@ footer {
   }
 
   .game-start {
-    grid-template:
-      'comm comm' 2rem
-      'name name' 1.5rem
-      'place place' 1.5rem
-      'board board' 1fr
-      'random play' 3rem;
+    grid-template-rows:
+      2rem
+      1.5rem
+      1.5rem
+      1fr
+      3rem;
   }
 
   .game-start > :first-child {
@@ -389,6 +389,11 @@ footer {
     padding: 2px;
   }
 
+  .game-start > :nth-child(3) {
+    padding: 6px;
+  }
+
+  .game-start > :nth-child(3),
   .game-start > :nth-child(4) {
     font-size: 0.8rem;
   }
