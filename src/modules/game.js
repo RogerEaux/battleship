@@ -1,5 +1,6 @@
 import createPlayer from './player';
 import {
+  renderDiff,
   renderGameboard,
   renderGameOver,
   renderGameStart,
@@ -130,6 +131,17 @@ function createGame() {
     addListeners();
   }
 
+  function handleDiff() {
+    renderDiff(this);
+    if (this.textContent === 'Easy') {
+      computer.difficulty = 20;
+    } else if (this.textContent === 'Hard') {
+      computer.difficulty = 15;
+    } else {
+      computer.difficulty = 10;
+    }
+  }
+
   function handleRotate(event) {
     event.preventDefault();
     vertical = !vertical;
@@ -155,7 +167,8 @@ function createGame() {
   }
 
   function addStartBoardListeners(DOMBoard) {
-    const rotateButton = document.querySelector('.game-start > :nth-child(6)');
+    const diffButton = document.querySelector('.game-start > :nth-child(3)');
+    const rotateButton = document.querySelector('.game-start > :nth-child(7)');
     const gameStartButton = document.querySelector('.game-start > :last-child');
 
     for (let i = 0; i < 10; i += 1) {
@@ -170,6 +183,7 @@ function createGame() {
     }
 
     DOMBoard.addEventListener('contextmenu', handleRotate);
+    diffButton.addEventListener('click', handleDiff);
     rotateButton.addEventListener('click', handleRotate);
     gameStartButton.addEventListener('click', handleGameStart);
   }
@@ -183,7 +197,7 @@ function createGame() {
   }
 
   function addRandomPlaceListener() {
-    const gameRandom = document.querySelector('.game-start > :nth-child(5)');
+    const gameRandom = document.querySelector('.game-start > :nth-child(6)');
 
     gameRandom.addEventListener('click', handleRandomStart);
   }
@@ -198,7 +212,7 @@ function createGame() {
   function startGame() {
     renderGameStart();
     renderRotateButton();
-    placeShips(document.querySelector('.game-start > :nth-child(4)'));
+    placeShips(document.querySelector('.game-start > :nth-child(5)'));
   }
 
   return {
