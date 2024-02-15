@@ -152,7 +152,7 @@ main :last-child > h2 {
 .game-start {
   grid-template:
     'comm comm' 3rem
-    'name name' 2rem
+    'name diff' 2rem
     'place place' 2rem
     'board board' 1fr
     'random play' 4rem;
@@ -172,18 +172,39 @@ main :last-child > h2 {
 }
 
 .game-start > :nth-child(3) {
+  grid-area: diff;
+  height: max-content;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  background-color: var(--ocean);
+  color: var(--miss);
+  padding: 8px;
+  border: none;
+  border-radius: 5px;
+}
+
+.game-start > :nth-child(3).hard {
+  background-color: var(--ship);
+}
+
+.game-start > :nth-child(3).harder {
+  background-color: var(--gray);
+}
+
+.game-start > :nth-child(4) {
   grid-area: place;
   font-weight: 700;
   margin-top: 16px;
   color: var(--gray);
 }
 
-.game-start > :nth-child(4) {
+.game-start > :nth-child(5) {
   grid-area: board;
 }
 
+.game-start > :nth-child(7),
 .game-start > :nth-child(6),
-.game-start > :nth-child(5),
 .game-start > :last-child,
 .game-over :last-child {
   height: max-content;
@@ -197,20 +218,20 @@ main :last-child > h2 {
   border-radius: 5px;
 }
 
-.game-start > :nth-child(5) {
+.game-start > :nth-child(6) {
   grid-area: random;
   font-size: 1.2rem;
   background-color: var(--hit);
 }
 
-.game-start > :nth-child(6),
+.game-start > :nth-child(7),
 .game-start > :last-child {
   grid-area: play;
   font-size: 1.2rem;
   visibility: hidden;
 }
 
-.game-start > :nth-child(6).visible,
+.game-start > :nth-child(7).visible,
 .game-start > :last-child.visible {
   visibility: visible;
 }
@@ -232,11 +253,11 @@ main :last-child > h2 {
   font-weight: 700;
 }
 
-.game-start > :nth-child(5):hover {
+.game-start > :nth-child(6):hover {
   background-color: rgba(216, 42, 49, 0.8);
 }
 
-.game-start > :nth-child(6):hover,
+.game-start > :nth-child(7):hover,
 .game-start > :last-child:hover,
 .game-over > :last-child:hover {
   background-color: rgba(98, 119, 144, 0.8);
@@ -312,8 +333,8 @@ footer {
     font-size: 1.2rem;
   }
 
-  .game-start > :nth-child(5),
   .game-start > :nth-child(6),
+  .game-start > :nth-child(7),
   .game-start > :last-child,
   .game-over :last-child {
     font-size: 1.2rem;
@@ -368,11 +389,11 @@ footer {
     padding: 2px;
   }
 
-  .game-start > :nth-child(3) {
+  .game-start > :nth-child(4) {
     font-size: 0.8rem;
   }
-  .game-start > :nth-child(5),
   .game-start > :nth-child(6),
+  .game-start > :nth-child(7),
   .game-start > :last-child,
   .game-over :last-child {
     font-size: 1rem;
