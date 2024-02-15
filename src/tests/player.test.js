@@ -69,4 +69,16 @@ describe('Player tests', () => {
     expect(hero.smartFire(enemy.gameboard)).toEqual([0, 6]);
     expect(hero.smartFire(enemy.gameboard)).toEqual([0, 8]);
   });
+
+  test('Smart attack only targets coords with even sum', () => {
+    function exclusiveEvenSum(coords) {
+      return (coords[0] + coords[1]) % 2 === 0;
+    }
+
+    expect(exclusiveEvenSum(hero.smartFire(enemy.gameboard))).toBeTruthy();
+    expect(exclusiveEvenSum(hero.smartFire(enemy.gameboard))).toBeTruthy();
+    expect(exclusiveEvenSum(hero.smartFire(enemy.gameboard))).toBeTruthy();
+    expect(exclusiveEvenSum(hero.smartFire(enemy.gameboard))).toBeTruthy();
+    expect(exclusiveEvenSum(hero.smartFire(enemy.gameboard))).toBeTruthy();
+  });
 });
