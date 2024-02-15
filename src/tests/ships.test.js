@@ -1,4 +1,4 @@
-import { createShip } from '../modules/ships';
+import createShip from '../modules/ships';
 
 describe('Ship tests', () => {
   test('Ship hit reduces hitPoint by 1', () => {

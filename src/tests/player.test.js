@@ -1,4 +1,4 @@
-import { createPlayer } from '../modules/player';
+import createPlayer from '../modules/player';
 let hero;
 let enemy;
 
@@ -33,6 +33,6 @@ describe('Player tests', () => {
 
   test('Attack random spot', () => {
     enemy.gameboard.place(3, [3, 3]);
-    expect(hero.blindFire(enemy.gameboard)).toBeTruthy();
+    expect(hero.blindFire(enemy.gameboard)).toEqual([3, 3]);
   });
 });

@@ -1,5 +1,5 @@
-import { createGameboard } from '../modules/gameboard';
-import { createShip } from '../modules/ships';
+import createGameboard from '../modules/gameboard';
+import createShip from '../modules/ships';
 
 let gameboard;
 
