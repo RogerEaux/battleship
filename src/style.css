@@ -236,6 +236,7 @@ main :last-child > h2 {
   background-color: rgba(216, 42, 49, 0.8);
 }
 
+.game-start > :nth-child(6):hover,
 .game-start > :last-child:hover,
 .game-over > :last-child:hover {
   background-color: rgba(98, 119, 144, 0.8);
