@@ -345,6 +345,10 @@ footer {
     grid-template-rows: 1.5rem 1fr;
   }
 
+  .modal {
+    height: 70%;
+  }
+
   .game-start {
     grid-template:
       'comm comm' 2rem
@@ -379,6 +383,6 @@ footer {
   }
 
   .game-over > :first-child {
-    font-size: 2rem;
+    font-size: 2.5rem;
   }
 }
