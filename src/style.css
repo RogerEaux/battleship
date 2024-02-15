@@ -174,6 +174,7 @@ main :last-child > h2 {
 .game-start > :nth-child(3) {
   grid-area: place;
   font-weight: 700;
+  margin-top: 16px;
   color: var(--gray);
 }
 
@@ -261,10 +262,9 @@ footer {
   visibility: visible;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 900px) {
   header > * {
-    font-size: 3rem;
-    margin-top: 32px;
+    font-size: 4rem;
     padding: 8px;
   }
 
@@ -274,11 +274,11 @@ footer {
   }
 
   main h2 {
-    font-size: 1.2rem;
+    font-size: 1.4rem;
   }
 
   .player {
-    grid-template-rows: 1.5rem 1fr;
+    grid-template-rows: 2rem 1fr;
   }
 
   .board {
@@ -308,6 +308,53 @@ footer {
   }
 
   .game-start > :first-child {
+    font-size: 1.2rem;
+  }
+
+  .game-start > :nth-child(5),
+  .game-start > :nth-child(6),
+  .game-start > :last-child,
+  .game-over :last-child {
+    font-size: 1.2rem;
+    padding: 12px;
+  }
+
+  .game-over :last-child {
+    font-size: 1.4rem;
+  }
+
+  .game-over > :first-child {
+    font-size: 3rem;
+  }
+
+  .game-over > :nth-child(2) {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 600px) {
+  header > * {
+    font-size: 3rem;
+  }
+
+  main h2 {
+    font-size: 1.2rem;
+  }
+
+  .player {
+    grid-template-rows: 1.5rem 1fr;
+  }
+
+  .game-start {
+    grid-template:
+      'comm comm' 2rem
+      'name name' 1.5rem
+      'place place' 1.5rem
+      'board board' 1fr
+      'random play' 3rem;
+  }
+
+  .game-start > :first-child {
     font-size: 1rem;
   }
 
@@ -323,21 +370,15 @@ footer {
   .game-start > :nth-child(6),
   .game-start > :last-child,
   .game-over :last-child {
-    font-size: 1.2rem;
+    font-size: 1rem;
     padding: 12px;
   }
 
-  .game-start > :nth-child(5),
-  .game-start > :nth-child(6),
-  .game-start > :last-child {
-    font-size: 1rem;
+  .game-over :last-child {
+    font-size: 1.2rem;
   }
 
   .game-over > :first-child {
     font-size: 2rem;
-  }
-
-  .game-over > :nth-child(2) {
-    font-size: 1.5rem;
   }
 }
