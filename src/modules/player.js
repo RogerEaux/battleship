@@ -103,6 +103,16 @@ function createPlayer(name) {
     return smartPoke(enemyGameboard);
   }
 
+  function cheat(enemyGameboard) {
+    for (let i = 0; i < 10; i += 1) {
+      for (let j = 0; j < 10; j += 1) {
+        if (enemyGameboard.grid[i][j] && enemyGameboard.grid[i][j] !== true) {
+          return attack(enemyGameboard, [i, j]);
+        }
+      }
+    }
+  }
+
   function reset() {
     attackedSpots.length = 0;
   }
@@ -123,6 +133,7 @@ function createPlayer(name) {
     attack,
     blindFire,
     smartFire,
+    cheat,
     reset,
   };
 }
