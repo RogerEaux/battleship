@@ -39,6 +39,7 @@ function createPlayer(name) {
 
   function smartPoke(enemyGameboard) {
     let coords = generateRandomCoords();
+    let counter = 0;
 
     //  Coords will only be in a cross pattern
     while (
@@ -46,6 +47,10 @@ function createPlayer(name) {
       JSON.stringify(attackedSpots).includes(JSON.stringify(coords))
     ) {
       coords = generateRandomCoords();
+      counter += 1;
+      if (counter > 420) {
+        return blindFire(enemyGameboard);
+      }
     }
 
     return attack(enemyGameboard, coords);
