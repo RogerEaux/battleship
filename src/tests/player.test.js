@@ -81,4 +81,10 @@ describe('Player tests', () => {
     expect(exclusiveEvenSum(hero.smartFire(enemy.gameboard))).toBeTruthy();
     expect(exclusiveEvenSum(hero.smartFire(enemy.gameboard))).toBeTruthy();
   });
+
+  test('Cheat always lands a hit', () => {
+    enemy.gameboard.place(1, [3, 3]);
+
+    expect(hero.cheat(enemy.gameboard)).toEqual([3, 3]);
+  });
 });
